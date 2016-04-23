@@ -1,6 +1,18 @@
 @import "mixins";
 @import "variables";
 
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 .project-dulcinea {
-  display: block;
+
+  @import "map-view";
+  @import "header-component";
+  @import "filter-component";
+  @import "detail-component";
+  @import "carousel-component";
 }

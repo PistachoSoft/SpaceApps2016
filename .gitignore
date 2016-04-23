@@ -51,7 +51,6 @@ node_modules/
 bower_components/
 *.log
 
-build/
 dist/
 ### VisualStudio template
 ## Ignore Visual Studio temporary files, build results, and
@@ -73,7 +72,6 @@ dist/
 [Rr]eleases/
 x64/
 x86/
-build/
 bld/
 [Bb]in/
 [Oo]bj/
@@ -375,6 +373,8 @@ Session.vim
 *~
 ### VisualStudioCode template
 .settings
+
+tmp/
 
 # Backend config file
 backend/config.js
