@@ -1,3 +1,13 @@
-.filter-component {
+@import "variables";
+@import "mixins";
 
+.filter-component {
+  background: $gray;
+  width: $filter-width;
+  position: absolute;
+  top: $header-height;
+  left: 0;
+  height: calc(100% - #{$header-height});
+
+  @include box-shadow($border-size, $border-size);
 }

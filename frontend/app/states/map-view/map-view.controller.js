@@ -1,4 +1,4 @@
-angular.module('ProjectDulcinea').controller('MapViewCtrl', [
+angular.module('ProjectBarataria').controller('MapViewCtrl', [
   '$scope',
   function($scope) {
     $scope.item = {
@@ -24,6 +24,7 @@ angular.module('ProjectDulcinea').controller('MapViewCtrl', [
       ]
     };
 
+    $scope.filterOpened = false;
     $scope.popupOpened = false;
 
     $scope.openDetail = function(item) {

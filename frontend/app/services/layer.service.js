@@ -1,4 +1,4 @@
-angular.module('ProjectDulcinea').service('layerService', [
+angular.module('ProjectBarataria').service('layerService', [
   function() {
     var layers = {};
   }

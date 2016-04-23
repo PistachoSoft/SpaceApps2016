@@ -2,13 +2,42 @@
 @import "mixins";
 
 .header-component {
-  background: $light-gray;
-  border-bottom: $border-size solid $dark-gray;
+  color: $white;
+  background: $dark-gray;
   width: 100%;
   height: $header-height;
-  box-sizing: border-box;
+  position: relative;
   line-height: $header-height;
   text-align: center;
+  z-index: 100;
 
-  @include box-shadow();
+  @include box-shadow($border-size, 0);
+
+  .filter-button {
+    color: $gray;
+    background: $darker-gray;
+    height: $header-height;
+    width: $header-height;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    &:hover {
+      color: $white;
+      background: $green;
+      cursor: pointer;
+
+      @include box-shadow($border-size, 0);
+    }
+
+    &.active {
+      color: $white;
+      background: $green;
+
+      &:hover {
+        background: $red;
+      }
+    }
+  }
 }
