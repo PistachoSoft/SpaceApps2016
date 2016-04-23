@@ -1,11 +1,11 @@
-var express  = require('express');          // Route management framework
-var parser   = require('body-parser');      // Parser for requests' body
-var mongoose = require('mongoose');         // MongoDB driver for node
-var morgan   = require('morgan');           // Log requests
+var express  = require('express');      // Route management framework
+var parser   = require('body-parser');  // Parser for requests' body
+var mongoose = require('mongoose');     // MongoDB driver for node
+var morgan   = require('morgan');       // Log requests
 
 //Internal dependencies
-var routes = require("./router");
-var config = require("../config");
+var routes = require('./router');
+var config = require('../config');
 
 
 /* SERVER CONFIG */
@@ -22,10 +22,10 @@ app.use(parser.urlencoded({'extended': 'false'}));
 app.use(parser.json({ type: 'application/vnd.api+json' }));
 //Enable Cross Origin Requests (only for the API)
 app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header("Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept");
-    next();
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept');
+  next();
 });
 // Last, add the routes to the application
 app.use('/', routes);
@@ -36,21 +36,21 @@ app.use('/', routes);
 var server;
 
 function start(cb) {
-    mongoose.connect(config.database.uri);
-    server = app.listen(port, function() {
-        if (cb) cb();
-    });
+  mongoose.connect(config.database.uri);
+  server = app.listen(port, function() {
+    if (cb) cb();
+  });
 }
 
 function close(cb) {
-    mongoose.connection.close(function() {
-        server.close(function() {
-            if (cb) cb();
-        });
+  mongoose.connection.close(function() {
+    server.close(function() {
+      if (cb) cb();
     });
-};
+  });
+}
 
 module.exports = {
-    start: start,
-    close: close,
-}
+  start: start,
+  close: close
+};
