@@ -8,7 +8,9 @@
   },
   "dependencies": {
     "angular": "1.4.5",
+    "bootstrap": "3.1.1",
     "jquery": "2.1.4",
+    "leaflet": "0.7.7",
     "lodash": "4.11.1"
   },
   "devDependencies": {
