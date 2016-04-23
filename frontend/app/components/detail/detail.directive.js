@@ -22,7 +22,7 @@
  * - {Array.<Link>} links: links to list.
  * - {Array.<Image>} images: list of images to display.
  */
-angular.module('ProjectDulcinea').directive('detail', [
+angular.module('ProjectBarataria').directive('detail', [
   '$templateCache',
   function($templateCache) {
     return {

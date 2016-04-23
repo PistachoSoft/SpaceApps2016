@@ -12,7 +12,7 @@
  *
  * - {Array.<Image>} images: list of images to display.
  */
-angular.module('ProjectDulcinea').directive('carousel', [
+angular.module('ProjectBarataria').directive('carousel', [
   '$templateCache',
   function($templateCache) {
     return {

@@ -1,4 +1,4 @@
-angular.module('ProjectDulcinea').config([
+angular.module('ProjectBarataria').config([
   '$stateProvider', '$urlRouterProvider',
   function($stateProvider, $urlRouterProvider) {
     $stateProvider

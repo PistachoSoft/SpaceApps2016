@@ -1,4 +1,4 @@
-angular.module('ProjectDulcinea').controller('MapViewCtrl', [
+angular.module('ProjectBarataria').controller('MapViewCtrl', [
   '$scope',
   function($scope) {
     $scope.item = {
