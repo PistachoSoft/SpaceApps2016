@@ -1,0 +1,19 @@
+<div class="modal fade"
+    data-ng-attr-id="{{ modalId }}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close">
+          <span class="fa fa-times"></span>
+        </button>
+        <h4 class="modal-title">{{ title }}</h4>
+      </div>
+      <div data-ng-transclude>
+         <!-- Content will go here -->
+      </div>
+    </div>
+  </div>
+</div>
