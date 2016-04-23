@@ -9,7 +9,7 @@ gulp.task('concat:js', function() {
     'tmp/app.js',
     'tmp/**/*.js'
   ])
-  .pipe(concat('project-dulcinea.js'))
+  .pipe(concat('project-barataria.js'))
   .pipe(gulp.dest('dist/'));
 });
 
@@ -17,7 +17,7 @@ gulp.task('concat:css', function() {
   return gulp.src([
     'tmp/**/*.css'
   ])
-  .pipe(concat('project-dulcinea.css'))
+  .pipe(concat('project-barataria.css'))
   .pipe(gulp.dest('dist/'));
 });
 

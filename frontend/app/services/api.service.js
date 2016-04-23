@@ -1,4 +1,4 @@
-angular.module('ProjectDulcinea').service('apiService', [
+angular.module('ProjectBarataria').service('apiService', [
   '$http',
   function($http) {
 

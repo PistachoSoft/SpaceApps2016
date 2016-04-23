@@ -1,1 +1,1 @@
-angular.module('ProjectDulcinea', ['ui.router']);
+angular.module('ProjectBarataria', ['ui.router']);

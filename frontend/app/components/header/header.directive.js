@@ -1,4 +1,4 @@
-angular.module('ProjectDulcinea').directive('header', [
+angular.module('ProjectBarataria').directive('header', [
   '$templateCache',
   function($templateCache) {
     return {

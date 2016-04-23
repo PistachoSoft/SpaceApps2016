@@ -9,7 +9,7 @@ gulp.task('html2js', function() {
   return gulp.src('app/**/*.tpl.html')
     .pipe(html2js({
       base: 'app',
-      outputModuleName: 'ProjectDulcinea',
+      outputModuleName: 'ProjectBarataria',
       quoteChar: '\''
     }))
     .pipe(concat('templates.js'))
