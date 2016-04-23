@@ -23,5 +23,10 @@ module.exports = {
     statsToADD.save(function (err) {
       callback(err, statsToADD);
     });
+  },
+  findAll: function(callback){
+    statsDB.find({},{_id:0, __v:0}, function(err, res){
+      callback(err,res)
+    });
   }
 }
