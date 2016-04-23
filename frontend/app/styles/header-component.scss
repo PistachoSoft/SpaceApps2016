@@ -1,8 +1,14 @@
 @import "variables";
+@import "mixins";
 
 .header-component {
+  background: $light-gray;
+  border-bottom: $border-size solid $dark-gray;
   width: 100%;
   height: $header-height;
+  box-sizing: border-box;
   line-height: $header-height;
   text-align: center;
+
+  @include box-shadow();
 }

@@ -1,0 +1,7 @@
+@import "variables";
+
+@mixin box-shadow() {
+  -webkit-box-shadow: 0 $border-size 5px 0 rgba($black, 0.75);
+  -moz-box-shadow: 0 $border-size 5px 0 rgba($black, 0.75);
+  box-shadow: 0 $border-size 5px 0 rgba($black, 0.75);
+}

@@ -8,6 +8,6 @@ gulp.task('sass', function() {
   return gulp.src([
     'app/styles/**/*.{scss,sass}'
   ])
-  .pipe(sass())
+  .pipe(sass.sync().on('error', sass.logError))
   .pipe(gulp.dest('tmp/styles'));
 });

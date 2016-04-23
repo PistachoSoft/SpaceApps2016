@@ -1,3 +1,7 @@
-.map-view {
+@import "variables";
 
+.map-view {
+  background: $gray;
+  height: 100%;
+  width: 100%;
 }

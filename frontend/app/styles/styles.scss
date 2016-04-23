@@ -6,9 +6,18 @@ html, body {
   width: 100%;
   margin: 0;
   padding: 0;
+  font-size: 20px;
+  font-family: 'Questrial', Arial;
 }
 
 .project-dulcinea {
+  height: 100%;
+  width: 100%;
+
+  .view {
+    height: inherit;
+    width: inherit;
+  }
 
   @import "map-view";
   @import "header-component";
