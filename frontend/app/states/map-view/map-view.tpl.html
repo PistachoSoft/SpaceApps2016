@@ -6,12 +6,23 @@
       data-filter
       data-filter-opened="filterOpened">
   </div>
+  <div data-modal-dialog
+    data-visible="popupOpened"
+    data-title="{{ detail.title }}"
+    data-modal-id="detailsModal">
+    <div data-detail
+      data-description="{{ detail.description }}"
+      data-links="detail.links"
+      data-images="detail.images">
+    </div>
+  </div>
   <div class="map-wrapper"
       data-ng-class="{
         'filter-opened': filterOpened
       }">
     <div id="map"></div>
-    <div class="button button-big upload-button">
+    <div class="button button-big upload-button"
+        data-ng-click="openDetail(item)">
       <span class="fa fa-upload"></span>
     </div>
   </div>

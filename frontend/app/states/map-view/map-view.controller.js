@@ -18,7 +18,16 @@ angular.module('ProjectBarataria').controller('MapViewCtrl', [
       ],
       images: [
         {
-          name: 'Just an image',
+          name: 'Just an image 1',
+          src: 'https://memecrunch.com/meme/AK3A7/looks-good-to-me/image.jpg?w=400&c=1'
+        }, {
+          name: 'Just an image 2',
+          src: 'http://img.memecdn.com/rmx-looks-good-to-me_fb_968414.jpg'
+        }, {
+          name: 'Just an image 3',
+          src: 'http://images.memes.com/meme/653108'
+        }, {
+          name: 'Just an image 4',
           src: 'http://lgtm.in/p/GJ8PB88oq'
         }
       ]

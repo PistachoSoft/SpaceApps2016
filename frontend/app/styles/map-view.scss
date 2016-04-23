@@ -76,4 +76,14 @@
       right: 0;
     }
   }
+
+  .modal {
+    overflow: auto;
+
+    .modal-title {
+      cursor: default;
+
+      @include unselect();
+    }
+  }
 }
