@@ -27,6 +27,7 @@ angular.module('ProjectDulcinea').controller('MapViewCtrl', [
     $scope.popupOpened = false;
 
     $scope.openDetail = function(item) {
+      console.log('Derp');
       $scope.detail = item;
       $scope.popupOpened = true;
     };

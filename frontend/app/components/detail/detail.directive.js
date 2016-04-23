@@ -32,7 +32,8 @@ angular.module('ProjectDulcinea').directive('detail', [
         title: '@',
         description: '@',
         links: '=',
-        images: '='
+        images: '=',
+        visible: '='
       },
       template: $templateCache.get('components/detail/detail.tpl.html'),
       link: function(scope, element) {
