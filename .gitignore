@@ -376,4 +376,5 @@ Session.vim
 ### VisualStudioCode template
 .settings
 
-
+# Backend config file
+backend/config.js

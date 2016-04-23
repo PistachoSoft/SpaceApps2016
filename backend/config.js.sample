@@ -1,0 +1,15 @@
+var configuration = {};
+
+// Different configurations for different environments
+switch(process.env.NODE_ENV) {
+    default:
+        configuration.port = 3000;
+        configuration.database = {
+            uri: 'mongodb://localhost/sample-dev',
+            user: 'dummy',
+            password: 's3cr3t'
+        };
+        break;
+}
+
+module.exports = configuration;
