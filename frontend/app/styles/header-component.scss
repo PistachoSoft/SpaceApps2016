@@ -4,31 +4,34 @@
 .header-component {
   color: $white;
   background: $dark-gray;
+  position: relative;
   width: 100%;
   height: $header-height;
-  position: relative;
   line-height: $header-height;
   text-align: center;
+  cursor: default;
   z-index: 100;
+
+  @include unselect();
 
   @include box-shadow($border-size, 0);
 
-  .filter-button {
-    color: $gray;
-    background: $darker-gray;
-    height: $header-height;
-    width: $header-height;
+  @media screen and (max-width: $responsive-limit) {
+    height: $header-height-responsive;
+    line-height: $header-height-responsive;
+  }
+
+  .header-button {
     position: absolute;
-    left: 0;
     top: 0;
     bottom: 0;
 
-    &:hover {
-      color: $white;
-      background: $green;
-      cursor: pointer;
+    &.filter {
+      left: 0;
+    }
 
-      @include box-shadow($border-size, 0);
+    &.stats {
+      right: 0;
     }
 
     &.active {
@@ -37,6 +40,10 @@
 
       &:hover {
         background: $red;
+      }
+
+      &:active {
+        background: darken($red, 6);
       }
     }
   }

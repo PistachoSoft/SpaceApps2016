@@ -1,1 +1,4 @@
-angular.module('ProjectBarataria', ['ui.router']);
+angular.module('ProjectBarataria', [
+  'ngTouch',
+  'ui.router'
+]);

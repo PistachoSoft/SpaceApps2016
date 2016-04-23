@@ -4,7 +4,15 @@ angular.module('ProjectBarataria').directive('filter', [
     return {
       replace: true,
       restrict: 'A',
-      template: $templateCache.get('components/filter/filter.tpl.html')
+      scope: {
+        filterOpened: '='
+      },
+      template: $templateCache.get('components/filter/filter.tpl.html'),
+      link: function(scope) {
+        scope.closeFilter = function() {
+          scope.filterOpened = false;
+        };
+      }
     };
   }
 ]);

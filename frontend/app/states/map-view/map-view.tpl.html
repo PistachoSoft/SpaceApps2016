@@ -1,13 +1,18 @@
 <div class="map-view">
   <div data-header
-      data-filter-opened="filterOpened"></div>
-  <div data-ng-if="filterOpened"
-      data-filter></div>
-  <div class="map"
+      data-filter-opened="filterOpened">
+  </div>
+  <div data-ng-show="filterOpened"
+      data-filter
+      data-filter-opened="filterOpened">
+  </div>
+  <div class="map-wrapper"
       data-ng-class="{
         'filter-opened': filterOpened
-      }"
-      data-ng-click="openDetail(item)">
-    Show detail popup
+      }">
+    <div id="map"></div>
+    <div class="button button-big upload-button">
+      <span class="fa fa-upload"></span>
+    </div>
   </div>
 </div>

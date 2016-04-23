@@ -1,6 +1,6 @@
 angular.module('ProjectBarataria').controller('MapViewCtrl', [
-  '$scope',
-  function($scope) {
+  '$scope', 'layerService',
+  function($scope, layerService) {
     $scope.item = {
       title: 'Events in Iwo Jima',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ' +
@@ -31,5 +31,7 @@ angular.module('ProjectBarataria').controller('MapViewCtrl', [
       $scope.detail = item;
       $scope.popupOpened = true;
     };
+
+    layerService.setupBaseLayer();
   }
 ]);
