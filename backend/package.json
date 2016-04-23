@@ -1,5 +1,15 @@
 {
   "name": "project-dulcinea-backend",
   "version": "0.0.0",
-  "author": "PistachoSoft"
+  "author": "PistachoSoft",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PistachoSoft/SpaceApps2016"
+  },
+  "dependencies": {
+    "body-parser": "1.15.0",
+    "express": "4.13.4",
+    "mongoose": "4.4.13",
+    "request": "2.72.0"
+  }
 }
