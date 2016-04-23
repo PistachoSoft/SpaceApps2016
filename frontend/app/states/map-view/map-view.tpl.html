@@ -1,4 +1,13 @@
 <div class="map-view">
-  <div data-header></div>
-  <div data-ng-click="openDetail(item)">Show detail popup</div>
+  <div data-header
+      data-filter-opened="filterOpened"></div>
+  <div data-ng-if="filterOpened"
+      data-filter></div>
+  <div class="map"
+      data-ng-class="{
+        'filter-opened': filterOpened
+      }"
+      data-ng-click="openDetail(item)">
+    Show detail popup
+  </div>
 </div>

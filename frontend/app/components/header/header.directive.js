@@ -4,7 +4,15 @@ angular.module('ProjectDulcinea').directive('header', [
     return {
       replace: true,
       restrict: 'A',
-      template: $templateCache.get('components/header/header.tpl.html')
+      scope: {
+        filterOpened: '='
+      },
+      template: $templateCache.get('components/header/header.tpl.html'),
+      link: function(scope) {
+        scope.toggleFilter = function() {
+          scope.filterOpened = !scope.filterOpened;
+        };
+      }
     };
   }
 ]);
