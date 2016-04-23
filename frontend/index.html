@@ -3,8 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <title>Project Dulcinea</title>
+
+  <link rel="stylesheet" href="dist/project-dulcinea.css"/>
+
+  <script src="node_modules/lodash/lodash.min.js"></script>
+  <script src="node_modules/leaflet/dist/leaflet.js"></script>
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="node_modules/angular/angular.min.js"></script>
+  <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
 </head>
 <body>
-  <section data-ng-app="ProjectDulcinea"></section>
+  <section data-ng-app="ProjectDulcinea">
+    <div data-ui-view></div>
+  </section>
+
+  <script src="dist/project-dulcinea.js"></script>
 </body>
 </html>
