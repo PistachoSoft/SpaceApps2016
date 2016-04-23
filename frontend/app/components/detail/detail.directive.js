@@ -17,7 +17,6 @@
  *
  * Receives as scope parameters:
  *
- * - {string} header: the header of the detail view.
  * - {string} description: the body of the detail view.
  * - {Array.<Link>} links: links to list.
  * - {Array.<Image>} images: list of images to display.
@@ -29,11 +28,9 @@ angular.module('ProjectBarataria').directive('detail', [
       replace: true,
       restrict: 'A',
       scope: {
-        title: '@',
         description: '@',
         links: '=',
-        images: '=',
-        visible: '='
+        images: '='
       },
       template: $templateCache.get('components/detail/detail.tpl.html'),
       link: function(scope, element) {
