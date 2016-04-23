@@ -375,3 +375,6 @@ Session.vim
 .settings
 
 tmp/
+
+# Backend config file
+backend/config.js
