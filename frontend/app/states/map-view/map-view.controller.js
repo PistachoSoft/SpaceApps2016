@@ -24,6 +24,7 @@ angular.module('ProjectDulcinea').controller('MapViewCtrl', [
       ]
     };
 
+    $scope.filterOpened = false;
     $scope.popupOpened = false;
 
     $scope.openDetail = function(item) {

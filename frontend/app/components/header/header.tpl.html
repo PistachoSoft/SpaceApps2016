@@ -1,3 +1,15 @@
 <div class="header-component">
+  <div class="filter-button"
+      data-ng-class="{
+        active: filterOpened
+      }"
+      data-ng-click="toggleFilter()">
+    <span class="fa"
+        data-ng-class="{
+          'fa-filter': !filterOpened,
+          'fa-times': filterOpened
+        }">
+    </span>
+  </div>
   Project Dulcinea
 </div>

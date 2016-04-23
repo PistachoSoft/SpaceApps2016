@@ -1,7 +1,15 @@
 @import "variables";
 
 .map-view {
-  background: $gray;
+  background: $light-gray;
   height: 100%;
   width: 100%;
+
+  .map {
+    padding: $standard-padding;
+
+    &.filter-opened {
+      margin-left: $filter-width;
+    }
+  }
 }
