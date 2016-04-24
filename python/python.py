@@ -19,6 +19,7 @@ def all():
     dateTo = None
     upperRight = None
     bottomLeft = None
+    events = None
 
     if 'country' in params:
         country = params['country']
@@ -35,11 +36,15 @@ def all():
         if 'bottomLeft' in params['box']:
             bottomLeft = params['box']['bottomLeft']
 
+    if 'events' in params:
+        events = params['events']
+
     body = json.dumps(MongoRepository.findAll(countries=country,
                                               dateFrom=dateFrom,
                                               dateTo=dateTo,
                                               upperRight=upperRight,
-                                              bottomLeft=bottomLeft))
+                                              bottomLeft=bottomLeft,
+                                              events=events))
     return Response(body, mimetype='application/json')
 
 
@@ -53,6 +58,7 @@ def test():
     dateTo = None
     upperRight = None
     bottomLeft = None
+    events = None
 
     if 'country' in params:
         country = params['country']
@@ -69,11 +75,15 @@ def test():
         if 'bottomLeft' in params['box']:
             bottomLeft = params['box']['bottomLeft']
 
+    if 'events' in params:
+        events = params['events']
+
     body = json.dumps(MongoRepository.findAll(countries=country,
                                               dateFrom=dateFrom,
                                               dateTo=dateTo,
                                               upperRight=upperRight,
-                                              bottomLeft=bottomLeft))
+                                              bottomLeft=bottomLeft,
+                                              events=events))
     return Response(body, mimetype='application/json')
 
 
