@@ -66,8 +66,9 @@ routes.route('/disasters-per-year')
     var from = req.query.from;
     var to = req.query.to;
     var countries = req.query.countries;
+    var disasters = req.query.disasters;
 
-    db.getDisasterPerYear(from,to,countries, function(err,result) {
+    db.getDisasterPerYear(from,to,countries,disasters, function(err,result) {
       if(!err)
         res.json(result);
       else
@@ -81,7 +82,8 @@ routes.route('/disasters-percentage-global')
     var from = req.query.from;
     var to = req.query.to;
     var countries = req.query.countries;
-    db.getDisastePercentage(from,to,countries, function(err,resullt){
+
+    db.getDisasterPercentage(from,to,countries, function(err,resullt){
       if(!err)
         res.json(result);
       else
@@ -95,6 +97,20 @@ routes.route('/disasters-evolution')
     var to = req.query.to;
     var countries = req.query.countries;
     db.getDisasterEvolution(from,to,countries, function(err,result) {
+      if(!err)
+        res.json(result);
+      else
+        res.send(err);
+    })
+  })
+
+routes.route('/global-percentage')
+  .get (function (req,res){
+    var from = req.query.from;
+    var to = req.query.to;
+    var countries = req.query.countries;
+    var disasters = req.query.disasters;
+    db.getGlobalPercentage(from,to,countries,disasters, function(err,result) {
       if(!err)
         res.json(result);
       else
