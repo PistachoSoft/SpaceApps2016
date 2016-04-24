@@ -59,6 +59,8 @@ def test():
     events = None
     dateFrom = None
     dateTo = None
+    featured = None
+    status = None
 
     if 'country' in params:
         country = params['country']
@@ -77,11 +79,19 @@ def test():
             dateFrom = params['date']['from']
             dateTo = params['date']['to']
 
+    if 'featured' in params:
+        featured = params['featured']
+
+    if 'status' in params:
+        status = params['status']
+
     body = json.dumps(MongoRepository.findAll(countries=country,
                                               dateFrom=dateFrom,
                                               dateTo=dateTo,
                                               upperRight=upperRight,
                                               bottomLeft=bottomLeft,
+                                              featured=featured,
+                                              status=status,
                                               events=events))
     return Response(body, mimetype='application/json')
 

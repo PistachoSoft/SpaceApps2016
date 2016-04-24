@@ -7,7 +7,8 @@ db = client.DisastersDateSpaceApps2016
 disasters = db.disasters
 
 
-def findAll(countries=None, dateFrom=None, dateTo=None, bottomLeft=[], upperRight=[], events=None):
+def findAll(countries=None, dateFrom=None, dateTo=None, bottomLeft=[], upperRight=[], status=None, events=None,
+            featured=None):
     query = {}
     andQuery = []
 
@@ -37,6 +38,14 @@ def findAll(countries=None, dateFrom=None, dateTo=None, bottomLeft=[], upperRigh
             })
         andQuery.append(eventsQuery)
 
+    if status is not None:
+        statusQuery = []
+        for oneStatus in status:
+            statusQuery.append({
+                'status': oneStatus
+            })
+        andQuery.append({'$or': statusQuery})
+
     if dateFrom is not None and dateTo is not None:
         dateQuery = {
             'date': {
@@ -46,21 +55,23 @@ def findAll(countries=None, dateFrom=None, dateTo=None, bottomLeft=[], upperRigh
         }
         andQuery.append(dateQuery)
 
+    if featured is not None:
+        featuredQuery = {
+            'featured': featured
+        }
+        andQuery.append(featuredQuery)
+
     if len(andQuery) > 1:
         query['$and'] = andQuery
     elif len(andQuery) == 1 and '$or' in andQuery[0]:
         query['$or'] = andQuery[0]['$or']
-    elif len(andQuery) == 1:
+    elif len(andQuery) == 1 and 'date' in andQuery[0]:
         query['date'] = andQuery[0]['date']
-
+    elif len(andQuery) == 1:
+        query['featured'] = andQuery[0]['featured']
 
     data_set = list(disasters.find(query))
     return map(lambda x: x['data'], data_set)
-    # return data_set
-
-
-# data_set = list(disasters.find())
-# return map(lambda x: x['data'], data_set)
 
 
 def eventTypes():
