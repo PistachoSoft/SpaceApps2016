@@ -19,14 +19,6 @@ angular.module('ProjectBarataria').service('layerService', [
 
       layers.base.attributionControl.setPrefix('');
 
-      //layers.marker = L.marker([41.659631, -0.907582]);
-      //
-      //layers.marker.on('click', function() {
-      //  $rootScope.$emit(events.area.clicked);
-      //});
-      //
-      //layers.marker.addTo(layers.base);
-
       new L.Control.Zoom({
         position: 'bottomleft'
       }).addTo(layers.base);
@@ -41,7 +33,7 @@ angular.module('ProjectBarataria').service('layerService', [
 
       markersList = data
       .filter(function(point) {
-        return point.properties.title && point.properties.description;
+        return point.properties.title/* && point.properties.description*/;
       })
       .map(function(point) {
         var marker = new L.marker(point.geometry.coordinates.reverse());
@@ -54,8 +46,6 @@ angular.module('ProjectBarataria').service('layerService', [
       });
 
       layers.markers = L.featureGroup(markersList).addTo(layers.base);
-
-      //layers.markers.addLayers(markersList);
     }
 
     function getBounds() {
