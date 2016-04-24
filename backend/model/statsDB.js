@@ -53,12 +53,31 @@ module.exports = {
     if(dateTo.length == 0)
       dateTo = 2016
 
-    var data = {year :  { $gt: dateFrom, $lt: dateTo }};
+    var jsonRes = [];
+    var countries = country.split(";");
+    console.log(countries);
+    var promises = [];
+    for (var i = dateFrom; i<dateTo;i++) {
+      (function(year) {
+        promises.push(new Promise(function (resolve, reject) {
+          statsDB.count({year: year,countryName: { $in:countries} }, function (err, res) {
+            if (!err) {
+              jsonRes.push({
+                year: year,
+                ocurrences: res
+              });
 
-    var items = statsDB.find(data);
-    items.exec( function(err,res){
-      callback(err,res);
-    })
+              resolve();
+            } else {
+              reject(err);
+            }
+          });
+        }));
+      }(i));
+    }
+    Promise.all(promises).then(function() {
+      callback(false,jsonRes);
+    });
   }
 
 

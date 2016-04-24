@@ -25,36 +25,59 @@ routes.route('/find')
     });
   })
 
-routes.route('/findCountry')
+routes.route('/filterCountries')
   .get(function (req,res)
   {
     db.getCountryList(function (err,result) {
 
-      res.send(result)
+      res.json(result)
     })
   })
 
-routes.route('/findDisaster')
+routes.route('/filterEvents')
   .get(function (req,res)
   {
     db.getDisasterList(function (err,result){
-      res.send(result);
+      res.json(result);
     })
   })
+
+routes.route('/filterDates')
+  .get(function (req,res) {
+    var json =
+    {
+      min : "1900",
+      max : "2016"
+    }
+    res.json(json);
+  })
+
 
 routes.route('/disasters-per-year')
   .get(function (req,res)
   {
-    var startYear = req.query.startYear;
-    var endYear = req.query.endYear;
-    var country = req.query.country;
+    var from = req.query.from;
+    var to = req.query.to;
+    var countries = req.query.countries;
 
-    db.getDisasterFromQuery(startYear,endYear,country, function(err,result) {
+    db.getDisasterFromQuery(from,to,countries, function(err,result) {
       if(!err)
         res.json(result);
       else
         res.send(err);
     })
+
   })
+
+routes.route('disasters-percentage-global')
+  .get (function (req,res) {
+
+  })
+
+routes.route('disasters-evolution')
+  .get (function (req,res){
+
+  })
+
 
 module.exports = routes;
