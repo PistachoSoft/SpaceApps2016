@@ -1,3 +1,32 @@
+@import "variables";
+
 .carousel-component {
+
+  .thumbnail-list {
+    padding: 0;
+    margin: 0 auto $standard-padding;
+  }
+
+  .carousel-item {
+    padding: $standard-padding;
+    display: inline-block;
+    max-height: $carousel-height;
+    height: $carousel-height;
+    background-color: $dark-gray;
+    max-width: 30%;
+
+    @media screen and (max-width: $carousel-responsive-limit) {
+      max-width: 100%;
+      &.hidden-mobile {
+        display: none;
+      }
+    }
+  }
+
+  .carousel-img {
+    max-width: 100%;
+    max-height: 100%;
+    vertical-align: top;
+  }
 
 }

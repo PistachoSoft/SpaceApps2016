@@ -24,6 +24,16 @@ angular.module('ProjectBarataria').directive('carousel', [
       template: $templateCache.get('components/carousel/carousel.tpl.html'),
       link: function(scope, element) {
 
+        scope.index = 0;
+
+        scope.prevImg = function() {
+          scope.index = (scope.index + 2) % 3;
+        };
+
+        scope.nextImg = function() {
+          scope.index = (scope.index + 1) % 3;
+        };
+
       }
     };
   }
