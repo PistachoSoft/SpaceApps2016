@@ -34,7 +34,7 @@ module.exports = {
     var items = statsDB.find().distinct('countryName');
     //items.select('countryName');
     items.exec( function(err,res){
-      callback(err,res);
+      callback(err,res.sort());
     })
 
   },
@@ -43,10 +43,10 @@ module.exports = {
     var items = statsDB.find().distinct('disasterType');
     //items.select('countryName');
     items.exec( function(err,res){
-      callback(err,res);
+      callback(err,res.sort());
     })
   },
-  getDisasterFromQuery : function (dateFrom, dateTo, country, callback)
+  getDisasterPerYear : function (dateFrom, dateTo, country, callback)
   {
     if(dateFrom.length == 0) {
       dateFrom = 1900;
@@ -94,5 +94,89 @@ module.exports = {
     Promise.all(promises).then(function() {
       callback(false,jsonRes);
     });
+  },
+
+  getDisasterEvolution : function (dateFrom, dateTo, country, callback)
+  {
+    if(dateFrom.length == 0) {
+      dateFrom = 1900;
+    }
+    if(dateTo.length == 0) {
+      dateTo = 2016
+    }
+    var jsonRes = [];
+    var countries;
+    if(country!=null && country.length!=0){
+      countries = country.split(";");
+    }
+    else{
+      countries = [];
+    }
+
+    var optionJson;
+    var eventArr = [
+      "Drought",
+      "Epidemic",
+      "Flood",
+      "Storm",
+      "Volcanic activity",
+      "Earthquake",
+      "Mass movement (dry)",
+      "Landslide",
+      "Wildfire",
+      "Insect infestation",
+      "Complex Disasters",
+      "Extreme temperature ",
+      "Impact",
+      "Animal accident"
+    ];
+    
+    var promises = [];
+    for (var i = dateFrom; i<dateTo;i++) {
+
+      (function (year) {
+        var values = [];
+
+        for (var j = 0; j < eventArr.length; j++) {
+          (function (event) {
+            promises.push(new Promise(function (resolve, reject) {
+
+              if (countries.length > 0) {
+                optionJson = {year: year, countryName: {$in: countries}, disasterType: eventArr[event]};
+              }
+              else {
+                optionJson = {year: year, disasterType: eventArr[event]}
+              }
+              statsDB.count(optionJson, function (err, res) {
+                if (!err) {
+                  values.push({
+                    event: eventArr[event],
+                    ocurrences: res
+                  });
+
+                  resolve();
+                } else {
+                  reject(err);
+                }
+              });
+            }));
+          }(j));
+        }
+
+        jsonRes.push({
+          year: year,
+          values: values
+        });
+
+      }(i));
+    }
+    Promise.all(promises).then(function() {
+      callback(false,jsonRes);
+    });
   }
+
+
+
+
+
 }
