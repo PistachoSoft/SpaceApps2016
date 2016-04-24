@@ -5,7 +5,8 @@ angular.module('ProjectBarataria').directive('filter', [
       replace: true,
       restrict: 'A',
       scope: {
-        filterOpened: '='
+        filterOpened: '=',
+        type: '@'
       },
       controller: 'FilterCtrl',
       template: $templateCache.get('components/filter/filter.tpl.html')

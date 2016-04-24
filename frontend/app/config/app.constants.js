@@ -7,6 +7,20 @@ angular.module('ProjectBarataria').constant('constants', {
     label: 'Countries',
     type: 'checkbox'
   },
+  statusFilter: {
+    label: 'Status',
+    type: 'checkbox'
+  },
+  featureFilter: {
+    label: 'Featured',
+    type: 'checkbox',
+    values: [
+      {
+        label: 'Featured',
+        checked: false
+      }
+    ]
+  },
   datesFilter: {
     label: 'Date Range',
     type: 'date'

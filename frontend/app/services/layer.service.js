@@ -28,8 +28,18 @@ angular.module('ProjectBarataria').service('layerService', [
       }).addTo(layers.base);
     }
 
+    function setMarkerLayer(data) {
+      console.log(data);
+    }
+
+    function getBounds() {
+      return layers.base.getBounds();
+    }
+
     return {
-      setupBaseLayer: setupBaseLayer
+      setupBaseLayer: setupBaseLayer,
+      setMarkerLayer: setMarkerLayer,
+      getCurrentBounds: getBounds
     };
   }
 ]);

@@ -5,11 +5,12 @@
   </div>
   <div data-ng-show="filterOpened"
       data-filter
+      data-type="map"
       data-filter-opened="filterOpened">
   </div>
-  <div data-ng-show="popupOpened">
+  <div data-ng-show="detailOpened">
     <div data-modal-dialog
-        data-visible="popupOpened"
+        data-visible="detailOpened"
         data-title="{{ detail.title }}"
         data-modal-id="detailsModal">
       <div data-detail
@@ -18,13 +19,21 @@
           data-images="detail.images"></div>
     </div>
   </div>
+  <div data-ng-show="uploadOpened">
+    <div data-modal-dialog
+        data-visible="uploadOpened"
+        data-title="{{ upload.title }}"
+        data-modal-id="uploadModal">
+      <div data-upload></div>
+    </div>
+  </div>
   <div class="map-wrapper"
       data-ng-class="{
         'filter-opened': filterOpened
       }">
     <div id="map"></div>
     <div class="button button-big upload-button"
-        data-ng-click="openDetail(item)">
+        data-ng-click="openUpload()">
       <span class="fa fa-upload"></span>
     </div>
   </div>

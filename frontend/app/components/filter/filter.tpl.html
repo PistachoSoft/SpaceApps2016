@@ -23,6 +23,9 @@
       <div class="values-container"
           data-ng-if="filter.expanded">
         <div data-ng-if="filter.type === 'checkbox'">
+          <div class="loading-filters"
+              data-loading
+              data-ng-if="!filter.values.length"></div>
           <div class="value-wrapper"
               data-ng-repeat="value in filter.values | filter: {label: search}"
               data-ng-click="toggleValue(value)">

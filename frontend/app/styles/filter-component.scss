@@ -84,6 +84,10 @@
       }
 
       .values-container {
+        position: relative;
+        min-height: $filter-value-height;
+        margin-bottom: $standard-padding;
+        box-sizing: content-box;
 
         .value-wrapper {
           height: $filter-value-height;

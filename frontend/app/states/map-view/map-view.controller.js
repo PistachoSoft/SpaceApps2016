@@ -1,7 +1,14 @@
 angular.module('ProjectBarataria').controller('MapViewCtrl', [
-  '$rootScope', '$scope', 'events', 'layerService',
-  function($rootScope, $scope, events, layerService) {
+  '$rootScope', '$scope', 'events', 'layerService', 'filterService', 'apiService',
+  function($rootScope, $scope, events, layerService, filterService, apiService) {
     var subscribers = [];
+
+    function refreshView() {
+      var bounds = layerService.getCurrentBounds(),
+        filters = filterService.getCurrentFilters();
+
+      console.log(bounds, filters);
+    }
 
     $scope.item = {
       title: 'Events in Iwo Jima',
@@ -36,22 +43,34 @@ angular.module('ProjectBarataria').controller('MapViewCtrl', [
     };
 
     $scope.filterOpened = false;
-    $scope.popupOpened = false;
+    $scope.detailOpened = false;
+    $scope.uploadOpened = false;
 
     $scope.openDetail = function(item) {
       $scope.detail = item;
-      $scope.popupOpened = true;
+      $scope.detailOpened = true;
+    };
+
+    $scope.openUpload = function() {
+      $scope.upload = {
+        title: 'Upload an image'
+      };
+      $scope.uploadOpened = true;
     };
 
     layerService.setupBaseLayer();
 
+    apiService.getAllPoints().then(function(data) {
+      layerService.setMarkerLayer(data);
+    });
+
     subscribers.push($rootScope.$on(events.filter.changed, function() {
-      // TODO refreshView()
+      refreshView();
     }));
 
     subscribers.push($rootScope.$on(events.area.clicked, function() {
       $scope.detail = _.cloneDeep($scope.item);
-      $scope.popupOpened = true;
+      $scope.detailOpened = true;
 
       $scope.$applyAsync();
     }));
