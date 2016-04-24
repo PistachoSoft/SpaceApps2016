@@ -3,7 +3,7 @@ angular.module('ProjectBarataria').service('apiService', [
   function($http, api) {
     function requestParse(options) {
       var result = {},
-        countryOptions;
+        countryOptions, eventOptions;
 
       if (options.bounds) {
         result.box = {
@@ -18,13 +18,35 @@ angular.module('ProjectBarataria').service('apiService', [
         });
 
         if (countryOptions) {
-          result.contry = countryOptions.values
+          result.country = countryOptions.values
           .filter(function(country) {
             return country.checked;
           })
           .map(function(country) {
             return country.iso.toLowerCase();
           });
+
+          if (!result.country.length) {
+            delete result.country;
+          }
+        }
+
+        eventOptions = _.find(options.filters, {
+          label: 'Event Types'
+        });
+
+        if (eventOptions) {
+          result.events = eventOptions.values
+          .filter(function(event) {
+            return event.checked;
+          })
+          .map(function(event) {
+            return +event.id;
+          });
+
+          if (!result.events.length) {
+            delete result.events;
+          }
         }
       }
 
@@ -73,7 +95,7 @@ angular.module('ProjectBarataria').service('apiService', [
 
         return $http.post(api.mapHost + api.rest.allPoints, _options)
         .then(function(response) {
-          return [] || response.data;
+          return response.data;
         });
       },
       // Get total number of disasters for each year in the interval

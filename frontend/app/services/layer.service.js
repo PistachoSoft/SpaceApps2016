@@ -6,12 +6,14 @@ angular.module('ProjectBarataria').service('layerService', [
       markers: null
     };
 
+    function markerClick(props) {
+      $rootScope.$emit(events.area.clicked, props);
+    }
+
     function setupBaseLayer() {
       layers.base = L.map('map', {
         zoomControl: false
       }).setView([41.659631, -0.907582], 13);
-
-      layers.markers = L.geoJson().addTo(layers.base);
 
       L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(layers.base);
 
@@ -31,9 +33,29 @@ angular.module('ProjectBarataria').service('layerService', [
     }
 
     function setMarkerLayer(data) {
-      console.log(data);
+      var markersList = [];
 
-      layers.markers.addData(data);
+      if (layers.markers) {
+        layers.markers.clearLayers();
+      }
+
+      markersList = data
+      .filter(function(point) {
+        return point.properties.title && point.properties.description;
+      })
+      .map(function(point) {
+        var marker = new L.marker(point.geometry.coordinates.reverse());
+
+        marker.on('click', function() {
+          markerClick(point.properties);
+        });
+
+        return marker;
+      });
+
+      layers.markers = L.featureGroup(markersList).addTo(layers.base);
+
+      //layers.markers.addLayers(markersList);
     }
 
     function getBounds() {

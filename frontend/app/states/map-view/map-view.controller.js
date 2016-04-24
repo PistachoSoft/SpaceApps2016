@@ -7,8 +7,6 @@ angular.module('ProjectBarataria').controller('MapViewCtrl', [
       var bounds = layerService.getCurrentBounds(),
         filters = filterService.getCurrentFilters();
 
-      console.log(bounds, angular.copy(filters));
-
       apiService.getAllPoints({
         filters: angular.copy(filters),
         bounds: bounds
@@ -78,8 +76,12 @@ angular.module('ProjectBarataria').controller('MapViewCtrl', [
       refreshView();
     }));
 
-    subscribers.push($rootScope.$on(events.area.clicked, function() {
-      $scope.detail = _.cloneDeep($scope.item);
+    subscribers.push($rootScope.$on(events.area.clicked, function(event, props) {
+      $scope.detail = {
+        title: props.title,
+        description: props.description,
+        links: props.links
+      };
       $scope.detailOpened = true;
 
       $scope.$applyAsync();
