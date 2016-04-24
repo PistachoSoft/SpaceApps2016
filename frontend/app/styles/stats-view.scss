@@ -3,13 +3,20 @@
 
 .stats-view {
   background: $light-gray;
+  height: 100%;
   width: 100%;
 
   .stats-wrapper {
+    height: calc(100% - #{$header-height});
     margin: 0 auto;
     text-align: center;
     list-style-type: none;
     padding: 0;
+    overflow: auto;
+
+    @media screen and (max-width: $responsive-limit) {
+      height: calc(100% - #{$header-height-responsive});
+    }
 
     .graph {
       background: $dark-gray;

@@ -1,13 +1,25 @@
 angular.module('ProjectBarataria').service('apiService', [
-  '$http',
-  function($http) {
-
-    var STATS_SERVICE_URI = 'http://192.168.0.31:3000';
-
+  '$http', 'api',
+  function($http, api) {
     return {
+      getFilterDates: function() {
+        return $http.get(api.host + api.rest.filterDates).then(function(response) {
+          return response.data;
+        });
+      },
+      getFilterCountries: function() {
+        return $http.get(api.host + api.rest.filterCountries).then(function(response) {
+          return response.data;
+        });
+      },
+      getFilterEvents: function() {
+        return $http.get(api.host + api.rest.filterEvents).then(function(response) {
+          return response.data;
+        });
+      },
       // Get total number of disasters for each year in the interval
       getDisastersPerYear: function(startYear, endYear, country) {
-        return $http.get(STATS_SERVICE_URI + '/disasters-per-year', {
+        return $http.get(api.host + api.rest.disastersPerYear, {
           from: startYear,
           to: endYear,
           country: country
@@ -15,7 +27,7 @@ angular.module('ProjectBarataria').service('apiService', [
       },
       // Get the total percentage of events of each type for the whole interval
       getDisastersPercentageGlobal: function(startYear, endYear, country) {
-        return $http.get(STATS_SERVICE_URI + '/disasters-percentage-global', {
+        return $http.get(api.host + api.rest.globalPercentages, {
           from: startYear,
           to: endYear,
           country: country
@@ -23,7 +35,7 @@ angular.module('ProjectBarataria').service('apiService', [
       },
       // Get the percentage of events of each type for each year in the interval
       getDissastersPercentagePerYear: function(startYear, endYear, country) {
-        return $http.get(STATS_SERVICE_URI + '/disasters-percentage-by-year', {
+        return $http.get(api.host + api.rest.perYearPercentages, {
           from: startYear,
           to: endYear,
           country: country
@@ -31,27 +43,12 @@ angular.module('ProjectBarataria').service('apiService', [
       },
       // Get the count of events of each type for each year in the interval
       getDisastersEvolution: function(startYear, endYear, country) {
-        return $http.get(STATS_SERVICE_URI + '/disasters-evolution', {
+        return $http.get(api.host + api.rest.disastersEvolution, {
           from: startYear,
           to: endYear,
           country: country
         });
-      },
-      // Get all the available options to filter by country
-      getFilterCountries: function() {
-        return $http.get(STATS_SERVICE_URI + '/filter/countries');
-      },
-      // Get all the available options to filter by event
-      getFilterEvents: function() {
-        return $http.get(STATS_SERVICE_URI + '/filter/events');
-      },
-      // Get all the available options to filter by date
-      getFilterDates: function() {
-        return $http.get(STATS_SERVICE_URI + '/filter/dates');
       }
-
-
     };
-
   }
 ]);

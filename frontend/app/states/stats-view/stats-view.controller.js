@@ -1,7 +1,10 @@
 angular.module('ProjectBarataria').controller('StatsViewCtrl', [
-  '$scope',
-  function($scope) {
+  '$rootScope', '$scope', 'events',
+  function($rootScope, $scope, events) {
+    var subscribers = [];
+
     $scope.filterOpened = false;
+
     $scope.disastersPerYear = [
       {year: 1999, occurrences: 400},
       {year: 2001, occurrences: 3300},
@@ -69,7 +72,17 @@ angular.module('ProjectBarataria').controller('StatsViewCtrl', [
     }
 
 
-    loadDisastersPerYear($scope.disastersPerYear);
+    subscribers.push($rootScope.$on(events.filter.changed, function() {
+      // TODO refreshStats()
+    }));
 
+    $scope.$on('$destroy', function() {
+      subscribers.forEach(function(subscriber) {
+        subscriber();
+      })
+    });
+
+
+    loadDisastersPerYear($scope.disastersPerYear);
   }
 ]);

@@ -1,55 +1,70 @@
 angular.module('ProjectBarataria').service('filterService', [
-  function() {
-    var defaultFilters = [
-        {
-          label: 'Event Types',
-          type: 'checkboxes',
-          values: [
-            {
-              label: 'Earthquakes'
-            }, {
-              label: 'Drought'
-            }, {
-              label: 'Wildfires'
-            }
-          ]
-        }, {
-          label: 'Countries',
-          type: 'checkboxes',
-          values: [
-            {
-              label: 'Spain'
-            }, {
-              label: 'Mexico'
-            }, {
-              label: 'Japan'
-            }
-          ]
-        }, {
-          label: 'Start Date',
-          type: 'date',
-          value: null
-        }, {
-          label: 'End Date',
-          type: 'date',
-          value: null
-        }
-      ],
-      selectedFilters = {
-        types: []
-      };
+  '$rootScope', '$q', 'events', 'constants', 'apiService',
+  function($rootScope, $q, events, constants, apiService) {
+    var selectedFilters = null;
 
-    function getDefaultFilters() {
-      return _.cloneDeep(defaultFilters);
+    function generateFilters() {
+      var defer = $q.defer();
+
+      $q.all({
+        dates: apiService.getFilterDates(),
+        countries: apiService.getFilterCountries(),
+        events: apiService.getFilterEvents()
+      })
+      .then(function(results) {
+        var events = constants.eventsFilter,
+          countries = constants.countriesFilter,
+          dates = constants.datesFilter;
+
+        events.values = results.events.map(function(event) {
+          return {
+            label: event,
+            checked: false
+          };
+        });
+
+        countries.values = results.countries.map(function(country) {
+          return {
+            label: country,
+            checked: false
+          };
+        });
+
+        dates.value = {
+          min: results.dates.min,
+          max: results.dates.max,
+          selected: [results.dates.min, results.dates.max]
+        };
+
+        defer.resolve([events, countries, dates])
+      });
+
+      return defer.promise;
     }
 
-    function getSelectedFilters() {
-      return _.cloneDeep(selectedFilters);
+    function getFilters() {
+      var defer = $q.defer();
+
+      if (selectedFilters) {
+        defer.resolve(_.cloneDeep(selectedFilters));
+      } else {
+        generateFilters().then(function(filters) {
+          defer.resolve(_.cloneDeep(filters));
+        });
+      }
+
+      return defer.promise;
+    }
+
+    function saveFilters(filters) {
+      selectedFilters = _.cloneDeep(filters);
+
+      $rootScope.$emit(events.filter.changed);
     }
 
     return {
-      getSelectedFilters: getSelectedFilters,
-      getDefaultFilters: getDefaultFilters
+      getFilters: getFilters,
+      saveFilters: saveFilters
     };
   }
 ]);

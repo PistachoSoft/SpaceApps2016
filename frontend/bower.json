@@ -1,0 +1,21 @@
+{
+  "name": "project-barataria-frontend",
+  "version": "0.0.0",
+  "authors": [
+    "PistachoSoft"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PistachoSoft/SpaceApps2016"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery-ui": "1.11.4"
+  }
+}

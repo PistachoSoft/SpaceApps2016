@@ -3,17 +3,17 @@
 
 .map-view {
   background: $light-gray;
-  height: calc(100% - #{$header-height});
+  height: 100%;
   width: 100%;
 
-  @media screen and (max-width: $responsive-limit) {
-    height: calc(100% - #{$header-height-responsive});
-  }
-
   .map-wrapper {
-    height: 100%;
+    height: calc(100% - #{$header-height});
     width: 100%;
     position: relative;
+
+    @media screen and (max-width: $responsive-limit) {
+      height: calc(100% - #{$header-height-responsive});
+    }
 
     &.filter-opened {
       width: 100%;

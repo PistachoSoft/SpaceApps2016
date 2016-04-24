@@ -8,12 +8,7 @@ angular.module('ProjectBarataria').directive('filter', [
         filterOpened: '='
       },
       controller: 'FilterCtrl',
-      template: $templateCache.get('components/filter/filter.tpl.html'),
-      link: function(scope) {
-        scope.closeFilter = function() {
-          scope.filterOpened = false;
-        };
-      }
+      template: $templateCache.get('components/filter/filter.tpl.html')
     };
   }
 ]);

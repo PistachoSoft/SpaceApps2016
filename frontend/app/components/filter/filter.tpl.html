@@ -1,8 +1,16 @@
-<div class="filter-component"
-    data-ng-swipe-left="closeFilter()">
+<div class="filter-component">
+  <div class="search-filters">
+    <input type="text"
+        class="search-field"
+        placeholder="Search filters..."
+        data-ng-model="search"/>
+  </div>
   <div class="filter-wrapper">
+    <div data-loading
+        data-ng-if="!filters.length"></div>
     <div class="filter-branch"
-        data-ng-repeat="filter in defaultFilters">
+        data-ng-if="filters.length"
+        data-ng-repeat="filter in filters">
       <div class="branch-label"
           data-ng-click="toggleBranch(filter)">
         <span class="branch-caret fa"
@@ -14,22 +22,34 @@
       </div>
       <div class="values-container"
           data-ng-if="filter.expanded">
-        <div data-ng-if="filter.type === 'checkboxes'">
-          <div data-ng-repeat="value in filter.values">
-            <div data-ng-click="toggleValue(value)">
-              <span class="value-checkbox"
-                  data-ng-class="{
-                    checked: value.checked
-                  }">
-              </span>
-              {{value.label}}
-            </div>
+        <div data-ng-if="filter.type === 'checkbox'">
+          <div class="value-wrapper"
+              data-ng-repeat="value in filter.values | filter: {label: search}"
+              data-ng-click="toggleValue(value)">
+            <span class="value-checkbox"
+                data-ng-class="{
+                  'checked fa fa-check': value.checked
+                }">
+            </span>
+            <span class="value-label">{{value.label}}</span>
           </div>
         </div>
-        <div data-ng-if="filter.type === 'date'">
-          Date input
+        <div class="value-date-range"
+            data-ng-if="filter.type === 'date'">
+          From {{filter.value.selected[0]}} to {{filter.value.selected[1]}}
+          <div class="value-slider"
+              data-ui-slider="{range: true}"
+              data-step="1"
+              data-min="{{filter.value.min}}"
+              data-max="{{filter.value.max}}"
+              data-ng-model="filter.value.selected">
+          </div>
         </div>
       </div>
     </div>
+  </div>
+  <div class="button button-big apply-button"
+      data-ng-click="applyFilters()">
+    Apply Filters
   </div>
 </div>
