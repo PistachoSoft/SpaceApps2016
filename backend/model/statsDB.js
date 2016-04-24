@@ -48,19 +48,35 @@ module.exports = {
   },
   getDisasterFromQuery : function (dateFrom, dateTo, country, callback)
   {
-    if(dateFrom.length == 0)
+    if(dateFrom.length == 0) {
       dateFrom = 1900;
-    if(dateTo.length == 0)
+    }
+    if(dateTo.length == 0) {
       dateTo = 2016
-
+    }
     var jsonRes = [];
-    var countries = country.split(";");
-    console.log(countries);
+    var countries;
+    if(country!=null && country.length!=0){
+      countries = country.split(";");
+    }
+    else{
+      countries = [];
+    }
+
+    var optionJson;
     var promises = [];
     for (var i = dateFrom; i<dateTo;i++) {
       (function(year) {
         promises.push(new Promise(function (resolve, reject) {
-          statsDB.count({year: year,countryName: { $in:countries} }, function (err, res) {
+
+          if(countries.length>0)
+          {
+            optionJson = {year: year,countryName: { $in:countries} };
+          }
+          else {
+            optionJson = {year: year}
+          }
+          statsDB.count(optionJson, function (err, res) {
             if (!err) {
               jsonRes.push({
                 year: year,
@@ -79,8 +95,4 @@ module.exports = {
       callback(false,jsonRes);
     });
   }
-
-
-
-
 }
