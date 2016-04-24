@@ -378,3 +378,5 @@ tmp/
 
 # Backend config file
 backend/config.js
+
+*.pyc
