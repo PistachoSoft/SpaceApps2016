@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 // DEFINE SCHEMA
-statsDB = new mongoose.Schema({
+var statsDBschema = mongoose.Schema({
   year : { type: String},
   disasterType : { type: String},
   iso : { type: String},
@@ -15,18 +15,23 @@ statsDB = new mongoose.Schema({
   totalDamage : { type: String}
 });
 
-var statsDB = mongoose.model('statsDB', statsDB);
+var statsDB = mongoose.model('statsDB', statsDBschema);
 
 module.exports = {
   add: function (stats, callback) {
     var statsToADD = new statsDB(stats);
     statsToADD.save(function (err) {
+      console.log(err);
       callback(err, statsToADD);
     });
   },
   findAll: function(callback){
-    statsDB.find({},{_id:0, __v:0}, function(err, res){
+    statsDB.find({}, function(err, res){
       callback(err,res)
     });
   }
+
+
+
+
 }
