@@ -60,4 +60,22 @@ module.exports = {
     ];
   },
 
+  sortByYear : function (a,b) {
+    if(a.year < b.year)
+      return -1;
+    else if (a.year > b.year)
+      return 1;
+    else
+      return 0;
+
+  },
+
+  sortBySum : function (a,b) {
+    if(a.total < b.total)
+      return -1;
+    else if (a.total > b.total)
+      return 1;
+    else return 0;
+  }
+
 }

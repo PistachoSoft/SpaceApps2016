@@ -51,7 +51,7 @@ module.exports = {
     var items = statsDB.find().distinct('disasterType');
     //items.select('countryName');
     items.exec(function (err, res) {
-      callback(err, res.sort());
+      callback(err, res);
     })
   },
   getDisasterPerYear: function (dateFrom, dateTo, country, disaster, callback) {
@@ -95,7 +95,7 @@ module.exports = {
       }(i));
     }
     Promise.all(promises).then(function () {
-      callback(false, jsonRes);
+      callback(false, jsonRes.sort(functions.sortByYear));
     });
   },
 
@@ -228,7 +228,7 @@ module.exports = {
 
     Promise.all(eventPromises)
     .then(function() {
-      callback(false, result);
+      callback(false, result.sort(functions.sortBySum));
     });
 
     // var jsonRes = [
