@@ -1,19 +1,22 @@
 var statsDB = require('../model/statsDB');
 var parse = require('csv-parse');
+var csvToArray = require('csv-to-array');
+var config = require('../config');
 
-var addAllToDB = function (callback)
+var addDataToDB = function (callback)
 {
 
-  var csv ='1900,Drought,CPV,"Cabo Verde",1,11000,,,,,\n1900,Drought,CPV,"Cabo Verde",1,11000,,,,,';
-  parse(csv, function(err,output){
+  var columns =  ["year","disasterType","iso","countryName","occurrence","totalDeaths","affected","injured","homeless","totalAffected","totalDamage"];
+  csvToArray({
+      file: config.dataCsv,
+      columns: columns
+    }, function(err,output){
     if(!err)
     {
-      var dataJson = output.map(createDBJson);
-      dataJson.forEach(addItem);
-      callback(dataJson);
+      callback(output);
     }
     else
-      callback("Error parsing all csv data");
+      callback(err);
   });
 
 }
@@ -46,5 +49,5 @@ function createDBJson (jsonList)
 }
 
 module.exports = {
-  allAllToDB :addAllToDB
+  addDataToDB : addDataToDB
 }

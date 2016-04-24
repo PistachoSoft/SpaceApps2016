@@ -11,7 +11,7 @@ routes.get('/', function(req, res) {
 
 routes.route('/parseCsv')
   .get(function (req,res) {
-    parse.addAllToDB(function (callback) {
+    parse.addDataToDB(function (callback) {
       res.json(callback);
     })
   })
@@ -20,7 +20,6 @@ routes.route('/find')
   .get(function (req,res)
   {
     db.findAll(function(err,result){
-      console.log(err);
       res.send(result);
     });
   })

@@ -21,7 +21,6 @@ module.exports = {
   add: function (stats, callback) {
     var statsToADD = new statsDB(stats);
     statsToADD.save(function (err) {
-      console.log(err);
       callback(err, statsToADD);
     });
   },
