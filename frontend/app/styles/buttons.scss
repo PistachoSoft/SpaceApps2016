@@ -1,0 +1,32 @@
+@import "variables";
+@import "mixins";
+
+.button {
+  color: $gray;
+  background: $darker-gray;
+  text-align: center;
+
+  &.button-big {
+    height: $button-height;
+    width: $button-height;
+    line-height: $button-height;
+
+    @media screen and (max-width: $responsive-limit) {
+      line-height: $button-height-responsive;
+      height: $button-height-responsive;
+      width: $button-height-responsive;
+    }
+  }
+
+  &:hover {
+    color: $white;
+    background: $green;
+    cursor: pointer;
+
+    @include box-shadow($border-size, 0);
+  }
+
+  &:active {
+    background: $darker-green;
+  }
+}
