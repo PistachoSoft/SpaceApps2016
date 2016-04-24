@@ -10,6 +10,7 @@
     "angular": "1.4.5",
     "angular-touch": "1.4.5",
     "angular-ui-router": "0.2.18",
+    "angular-ui-slider": "0.3.0",
     "bootstrap": "3.1.1",
     "bootstrap-datepicker": "1.6.0",
     "font-awesome": "4.6.1",

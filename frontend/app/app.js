@@ -1,4 +1,5 @@
 angular.module('ProjectBarataria', [
   'ngTouch',
-  'ui.router'
+  'ui.router',
+  'ui.slider'
 ]);

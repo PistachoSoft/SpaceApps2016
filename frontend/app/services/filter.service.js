@@ -3,7 +3,7 @@ angular.module('ProjectBarataria').service('filterService', [
     var defaultFilters = [
         {
           label: 'Event Types',
-          type: 'checkboxes',
+          type: 'checkbox',
           values: [
             {
               label: 'Earthquakes'
@@ -15,7 +15,7 @@ angular.module('ProjectBarataria').service('filterService', [
           ]
         }, {
           label: 'Countries',
-          type: 'checkboxes',
+          type: 'checkbox',
           values: [
             {
               label: 'Spain'
@@ -26,30 +26,28 @@ angular.module('ProjectBarataria').service('filterService', [
             }
           ]
         }, {
-          label: 'Start Date',
+          label: 'Date Range',
           type: 'date',
-          value: null
-        }, {
-          label: 'End Date',
-          type: 'date',
-          value: null
+          value: {
+            max: 2016,
+            min: 1950,
+            selected: [1950, 2016]
+          }
         }
       ],
-      selectedFilters = {
-        types: []
-      };
+      selectedFilters = null;
 
-    function getDefaultFilters() {
-      return _.cloneDeep(defaultFilters);
+    function getFilters() {
+      return _.cloneDeep(selectedFilters || defaultFilters);
     }
 
-    function getSelectedFilters() {
-      return _.cloneDeep(selectedFilters);
+    function saveFilters(filters) {
+      selectedFilters = _.cloneDeep(filters);
     }
 
     return {
-      getSelectedFilters: getSelectedFilters,
-      getDefaultFilters: getDefaultFilters
+      getFilters: getFilters,
+      saveFilters: saveFilters
     };
   }
 ]);
