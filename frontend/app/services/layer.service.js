@@ -13,7 +13,7 @@ angular.module('ProjectBarataria').service('layerService', [
     function setupBaseLayer() {
       layers.base = L.map('map', {
         zoomControl: false
-      }).setView([41.659631, -0.907582], 13);
+      }).setView([41.659631, -0.907582], 6);
 
       L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(layers.base);
 

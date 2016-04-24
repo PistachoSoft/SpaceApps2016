@@ -133,8 +133,8 @@ angular.module('ProjectBarataria').controller('StatsViewCtrl', [
             .attr('x', legendRectSize + legendSpacing)
             .attr('y', legendRectSize - legendSpacing)
             .text(function(d) { return d; });
-    } 
-                
+    }
+
     subscribers.push($rootScope.$on(events.filter.changed, function() {
       loadCharts();
     }));
@@ -146,46 +146,42 @@ angular.module('ProjectBarataria').controller('StatsViewCtrl', [
     });
 
     function loadCharts() {
-      filterService.getFilters()
-        .then(function(data) {
-          var filters = {};
-          for (var i = 0; i < data.length; i++) {
-            if (data[i].label === 'Date Range') {
-              filters.from = data[i].value.selected[0];
-              filters.to = data[i].value.selected[1];
-            } else if (data[i].label === 'Event Types') {
-              filters.events = data[i].values
-                  .filter(function(itm) { return itm.checked; })
-                  .map(function(itm) { return itm.label })
-                  .join(';');
-            } else if (data[i].label === 'Countries') {
-              filters.countries = data[i].values
-                  .filter(function(itm) { return itm.checked; })
-                  .map(function(itm) { return itm.label })
-                  .join(';');
-            }
-          }
-          apiService.getDisastersPerYear(filters.from, filters.to, filters.countries, filters.events)
-              .then(function(response) {
-                $scope.disastersPerYear = response.data;
-                loadDisastersPerYear($scope.disastersPerYear);
-              }, function(error) {
-                console.log(error);
-              });
-          // apiService.getPercentageGlobal(filters.from, filters.to, filters.countries, filters.events)
-          apiService.getDisastersPerYear(filters.from, filters.to, filters.countries, filters.events)
-              .then(function(response) {
-                $scope.globalPercentage = response.data.slice(0,5);
-                loadGlobalPercentages($scope.globalPercentage);
-              }, function(error) {
-                console.log(error);
-              });
-        }, function(err) {
-          console.log(err);
-        });
+      var data = filterService.getCurrentFilters() || [];
+
+      var filters = {};
+      for (var i = 0; i < data.length; i++) {
+        if (data[i].label === 'Date Range') {
+          filters.from = data[i].value.selected[0];
+          filters.to = data[i].value.selected[1];
+        } else if (data[i].label === 'Event Types') {
+          filters.events = data[i].values
+              .filter(function(itm) { return itm.checked; })
+              .map(function(itm) { return itm.label })
+              .join(';');
+        } else if (data[i].label === 'Countries') {
+          filters.countries = data[i].values
+              .filter(function(itm) { return itm.checked; })
+              .map(function(itm) { return itm.label })
+              .join(';');
+        }
+      }
+      apiService.getDisastersPerYear(filters.from, filters.to, filters.countries, filters.events)
+          .then(function(response) {
+            $scope.disastersPerYear = response.data;
+            loadDisastersPerYear($scope.disastersPerYear);
+          }, function(error) {
+            console.log(error);
+          });
+      // apiService.getPercentageGlobal(filters.from, filters.to, filters.countries, filters.events)
+      apiService.getDisastersPerYear(filters.from, filters.to, filters.countries, filters.events)
+          .then(function(response) {
+            $scope.globalPercentage = response.data.slice(0,5);
+            loadGlobalPercentages($scope.globalPercentage);
+          }, function(error) {
+            console.log(error);
+          });
     }
 
     loadCharts();
-
   }
 ]);
