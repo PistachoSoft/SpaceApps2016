@@ -1,4 +1,4 @@
-from flask import Flask, Response
+from flask import Flask, Response, request
 from flask.ext.cors import CORS, cross_origin
 import MongoRepository
 import ApiRepository
@@ -9,10 +9,71 @@ cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
-@app.route('/all')
+@app.route('/all', methods=['POST', 'OPTIONS'])
 @cross_origin()
 def all():
-    body = json.dumps(MongoRepository.findAll())
+    params = json.loads(request.data)
+
+    country = None
+    dateFrom = None
+    dateTo = None
+    upperRight = None
+    bottomLeft = None
+
+    if 'country' in params:
+        country = params['country']
+
+    if 'date' in params:
+        if 'from' in params['date']:
+            dateFrom = params['date']['from']
+        if 'to' in params['date']:
+            dateTo = params['date']['to']
+
+    if 'box' in params:
+        if 'upperRight' in params['box']:
+            upperRight = params['box']['upperRight']
+        if 'bottomLeft' in params['box']:
+            bottomLeft = params['box']['bottomLeft']
+
+    body = json.dumps(MongoRepository.findAll(countries=country,
+                                              dateFrom=dateFrom,
+                                              dateTo=dateTo,
+                                              upperRight=upperRight,
+                                              bottomLeft=bottomLeft))
+    return Response(body, mimetype='application/json')
+
+
+@app.route('/test', methods=['POST', 'OPTIONS'])
+@cross_origin()
+def test():
+    params = json.loads(request.data)
+
+    country = None
+    dateFrom = None
+    dateTo = None
+    upperRight = None
+    bottomLeft = None
+
+    if 'country' in params:
+        country = params['country']
+
+    if 'date' in params:
+        if 'from' in params['date']:
+            dateFrom = params['date']['from']
+        if 'to' in params['date']:
+            dateTo = params['date']['to']
+
+    if 'box' in params:
+        if 'upperRight' in params['box']:
+            upperRight = params['box']['upperRight']
+        if 'bottomLeft' in params['box']:
+            bottomLeft = params['box']['bottomLeft']
+
+    body = json.dumps(MongoRepository.findAll(countries=country,
+                                              dateFrom=dateFrom,
+                                              dateTo=dateTo,
+                                              upperRight=upperRight,
+                                              bottomLeft=bottomLeft))
     return Response(body, mimetype='application/json')
 
 
