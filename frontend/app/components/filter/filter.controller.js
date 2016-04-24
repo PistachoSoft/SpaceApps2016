@@ -15,7 +15,7 @@ angular.module('ProjectBarataria').controller('FilterCtrl', [
       filterService.saveFilters($scope.filters);
     };
 
-    filterService.getFilters().then(function(filters) {
+    filterService.getDefaultFilters($scope.type).then(function(filters) {
       $scope.filters = filters;
     });
   }

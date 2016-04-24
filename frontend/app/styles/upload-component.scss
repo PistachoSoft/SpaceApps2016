@@ -1,0 +1,55 @@
+@import "variables";
+@import "mixins";
+
+.upload-component {
+  .upload-left {
+    width: calc(50% - #{$standard-padding});
+    float: left;
+    padding: $standard-margin;
+    box-sizing: border-box;
+
+    @media screen and (max-width: $responsive-limit) {
+      width: 100%;
+      float: none;
+    }
+
+    .file-input {
+      width: 100%;
+    }
+  }
+
+  .upload-right {
+    width: calc(50% - #{$standard-padding});
+    float: right;
+    padding: $standard-margin;
+    box-sizing: border-box;
+
+    @media screen and (max-width: $responsive-limit) {
+      width: 100%;
+      float: none;
+    }
+
+    .country-input {
+      width: 100%;
+      margin-bottom: $standard-margin;
+
+      .country-field {
+        width: 100%;
+        padding: $standard-padding;
+        font-family: inherit;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+
+  .submit-button {
+    width: 100%;
+
+    .upload {
+      width: 100%;
+    }
+  }
+}

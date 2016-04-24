@@ -32,10 +32,7 @@ angular.module('ProjectBarataria').directive('detail', [
         links: '=',
         images: '='
       },
-      template: $templateCache.get('components/detail/detail.tpl.html'),
-      link: function(scope, element) {
-
-      }
+      template: $templateCache.get('components/detail/detail.tpl.html')
     };
   }
 ]);

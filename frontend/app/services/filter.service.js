@@ -3,31 +3,56 @@ angular.module('ProjectBarataria').service('filterService', [
   function($rootScope, $q, events, constants, apiService) {
     var selectedFilters = null;
 
-    function generateFilters() {
-      var defer = $q.defer();
+    function generateFilters(filterType) {
+      var defer = $q.defer(),
+        promises= {
+          dates: apiService.getFilterDates(),
+          countries: apiService.getFilterCountries(),
+          events: apiService.getFilterEvents(filterType)
+        };
 
-      $q.all({
-        dates: apiService.getFilterDates(),
-        countries: apiService.getFilterCountries(),
-        events: apiService.getFilterEvents()
-      })
+      if (filterType === 'map') {
+        promises.status = apiService.getFilterStatus();
+      }
+
+      $q.all(promises)
       .then(function(results) {
         var events = constants.eventsFilter,
           countries = constants.countriesFilter,
-          dates = constants.datesFilter;
+          dates = constants.datesFilter,
+          status = constants.statusFilter,
+          featured = constants.featureFilter,
+          filters;
 
         events.values = results.events.map(function(event) {
-          return {
-            label: event,
-            checked: false
-          };
+          var _event = {};
+
+          if (filterType === 'map') {
+            _event.label = event.name;
+            _event.id = event.id;
+          } else {
+            _event.label = event;
+          }
+
+          _event.checked = false;
+
+          return _event;
+        });
+
+        events.values = _.sortBy(events.values, function(event) {
+          return event.label;
         });
 
         countries.values = results.countries.map(function(country) {
           return {
-            label: country,
+            label: country.countryName,
+            iso: country.iso,
             checked: false
           };
+        });
+
+        countries.values = _.sortBy(countries.values, function(country) {
+          return country.label;
         });
 
         dates.value = {
@@ -36,24 +61,38 @@ angular.module('ProjectBarataria').service('filterService', [
           selected: [results.dates.min, results.dates.max]
         };
 
-        defer.resolve([events, countries, dates])
+        if (filterType === 'map') {
+          status.values = results.status.map(function(state) {
+            return {
+              label: _.capitalize(state),
+              id: state,
+              checked: false
+            };
+          });
+
+          filters = [events, countries, status, featured, dates];
+        } else {
+          filters = [events, countries, dates];
+        }
+
+        defer.resolve(filters);
       });
 
       return defer.promise;
     }
 
-    function getFilters() {
+    function getDefaultFilters(filterType) {
       var defer = $q.defer();
 
-      if (selectedFilters) {
-        defer.resolve(_.cloneDeep(selectedFilters));
-      } else {
-        generateFilters().then(function(filters) {
-          defer.resolve(_.cloneDeep(filters));
-        });
-      }
+      generateFilters(filterType).then(function(filters) {
+        defer.resolve(_.cloneDeep(filters));
+      });
 
       return defer.promise;
+    }
+
+    function getCurrentFilters() {
+      return selectedFilters;
     }
 
     function saveFilters(filters) {
@@ -63,7 +102,8 @@ angular.module('ProjectBarataria').service('filterService', [
     }
 
     return {
-      getFilters: getFilters,
+      getDefaultFilters: getDefaultFilters,
+      getCurrentFilters: getCurrentFilters,
       saveFilters: saveFilters
     };
   }
