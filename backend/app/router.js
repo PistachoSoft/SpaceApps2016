@@ -42,4 +42,19 @@ routes.route('/findDisaster')
     })
   })
 
+routes.route('/disasters-per-year')
+  .get(function (req,res)
+  {
+    var startYear = req.query.startYear;
+    var endYear = req.query.endYear;
+    var country = req.query.country;
+
+    db.getDisasterFromQuery(startYear,endYear,country, function(err,result) {
+      if(!err)
+        res.json(result);
+      else
+        res.send(err);
+    })
+  })
+
 module.exports = routes;

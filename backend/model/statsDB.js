@@ -45,7 +45,20 @@ module.exports = {
     items.exec( function(err,res){
       callback(err,res);
     })
+  },
+  getDisasterFromQuery : function (dateFrom, dateTo, country, callback)
+  {
+    if(dateFrom.length == 0)
+      dateFrom = 1900;
+    if(dateTo.length == 0)
+      dateTo = 2016
 
+    var data = {year :  { $gt: dateFrom, $lt: dateTo }};
+
+    var items = statsDB.find(data);
+    items.exec( function(err,res){
+      callback(err,res);
+    })
   }
 
 
