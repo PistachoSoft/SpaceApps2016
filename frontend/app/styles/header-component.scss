@@ -1,0 +1,50 @@
+@import "variables";
+@import "mixins";
+
+.header-component {
+  color: $white;
+  background: $dark-gray;
+  position: relative;
+  width: 100%;
+  height: $header-height;
+  line-height: $header-height;
+  text-align: center;
+  cursor: default;
+  z-index: 100;
+
+  @include unselect();
+
+  @include box-shadow($border-size, 0);
+
+  @media screen and (max-width: $responsive-limit) {
+    height: $header-height-responsive;
+    line-height: $header-height-responsive;
+  }
+
+  .header-button {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+
+    &.filter {
+      left: 0;
+    }
+
+    &.stats {
+      right: 0;
+    }
+
+    &.active {
+      color: $white;
+      background: $green;
+
+      &:hover {
+        background: $red;
+      }
+
+      &:active {
+        background: darken($red, 6);
+      }
+    }
+  }
+}

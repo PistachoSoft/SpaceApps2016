@@ -1,0 +1,14 @@
+<div class="detail-component">
+  <div class="modal-body">
+    <p>{{ description }}</p>
+    <h3>Links</h3>
+    <ul>
+      <li data-ng-repeat="link in links">
+        <a href="{{ link.url }}">{{ link.name }}</a>
+      </li>
+    </ul>
+    <h3>Images</h3>
+    <div data-carousel
+        data-images="images"></div>
+  </div>
+</div>

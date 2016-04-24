@@ -1,0 +1,14 @@
+@import "variables";
+
+@mixin box-shadow($right, $bottom) {
+  -webkit-box-shadow: $right $bottom 5px 0 rgba($black, 0.75);
+  -moz-box-shadow: $right $bottom 5px 0 rgba($black, 0.75);
+  box-shadow: $right $bottom 5px 0 rgba($black, 0.75);
+}
+
+@mixin unselect() {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

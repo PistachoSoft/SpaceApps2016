@@ -1,1 +1,5 @@
-angular.module('ProjectDulcinea', []);
+angular.module('ProjectBarataria', [
+  'ngTouch',
+  'ui.router',
+  'ui.slider'
+]);

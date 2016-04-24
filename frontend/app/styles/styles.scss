@@ -1,6 +1,30 @@
 @import "mixins";
 @import "variables";
 
-.project-dulcinea {
-  display: block;
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  font-family: 'Questrial', Arial;
+}
+
+.project-barataria {
+  height: 100%;
+  width: 100%;
+
+  .view {
+    height: inherit;
+    width: inherit;
+  }
+
+  @import "buttons";
+  @import "map-view";
+  @import "stats-view";
+  @import "header-component";
+  @import "loading-component";
+  @import "filter-component";
+  @import "detail-component";
+  @import "carousel-component";
 }

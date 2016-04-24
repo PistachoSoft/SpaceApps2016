@@ -1,0 +1,25 @@
+<div class="header-component">
+  <div class="button button-big header-button filter"
+      data-ng-class="{
+        active: filterOpened
+      }"
+      data-ng-click="toggleFilter()">
+    <span class="fa"
+        data-ng-class="{
+          'fa-filter': !filterOpened,
+          'fa-times': filterOpened
+        }">
+    </span>
+  </div>
+  Project Barataria
+  <div class="button button-big header-button stats"
+      data-ng-if="state === 'home'"
+      data-ui-sref="stats">
+    <span class="fa fa-bar-chart"></span>
+  </div>
+  <div class="button button-big header-button stats"
+      data-ng-if="state === 'stats'"
+      data-ui-sref="home">
+    <span class="fa fa-globe"></span>
+  </div>
+</div>
