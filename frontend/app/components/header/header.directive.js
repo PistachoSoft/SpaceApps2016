@@ -5,7 +5,8 @@ angular.module('ProjectBarataria').directive('header', [
       replace: true,
       restrict: 'A',
       scope: {
-        filterOpened: '='
+        filterOpened: '=',
+        state: '@'
       },
       template: $templateCache.get('components/header/header.tpl.html'),
       link: function(scope) {

@@ -3,21 +3,21 @@
     <li class="carousel-item">
       <a data-ng-click="showImg(index)">
         <img class="carousel-img"
-            src="{{ images[index].src }}"
+            data-ng-src="{{ images[index].src }}"
             alt="{{ images[index].name }}">
       </a>
     </li>
     <li class="carousel-item hidden-mobile">
       <a data-ng-click="showImg((index + 1) % 3)">
         <img class="carousel-img"
-            src="{{ images[(index + 1) % 3].src }}"
+            data-ng-src="{{ images[(index + 1) % 3].src }}"
             alt="{{ images[(index + 1) % 3].name }}">
       </a>
     </li>
     <li class="carousel-item hidden-mobile">
       <a data-ng-click="showImg((index + 2) % 3)">
         <img class="carousel-img"
-            src="{{ images[(index + 2) % 3].src }}"
+            data-ng-src="{{ images[(index + 2) % 3].src }}"
             alt="{{ images[(index + 2) % 3].name }}">
       </a>
     </li>

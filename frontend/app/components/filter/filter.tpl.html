@@ -1,4 +1,35 @@
 <div class="filter-component"
     data-ng-swipe-left="closeFilter()">
-
+  <div class="filter-wrapper">
+    <div class="filter-branch"
+        data-ng-repeat="filter in defaultFilters">
+      <div class="branch-label"
+          data-ng-click="toggleBranch(filter)">
+        <span class="branch-caret fa"
+            data-ng-class="{
+              'fa-caret-down': filter.expanded,
+              'fa-caret-right': !filter.expanded
+            }"></span>
+        {{filter.label}}
+      </div>
+      <div class="values-container"
+          data-ng-if="filter.expanded">
+        <div data-ng-if="filter.type === 'checkboxes'">
+          <div data-ng-repeat="value in filter.values">
+            <div data-ng-click="toggleValue(value)">
+              <span class="value-checkbox"
+                  data-ng-class="{
+                    checked: value.checked
+                  }">
+              </span>
+              {{value.label}}
+            </div>
+          </div>
+        </div>
+        <div data-ng-if="filter.type === 'date'">
+          Date input
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
