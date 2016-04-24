@@ -12,13 +12,20 @@ angular.module('ProjectBarataria').service('apiService', [
         return $q.resolve([
           'Spain',
           'Japan',
-          'Mexico'
+          'Mexico',
+          'United States',
+          'Peru',
+          'France'
         ]);
       },
       getFilterEvents: function() {
         return $q.resolve([
           'Wildfires',
-          'Derp'
+          'Earthquakes',
+          'Droughts',
+          'Floods',
+          'Typhoons',
+          'Volcano'
         ]);
       }
     };
