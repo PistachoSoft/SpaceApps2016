@@ -3,7 +3,7 @@ import Constants
 import requests
 
 client = pymongo.MongoClient(Constants.MONGOURL)
-db = client.DisastersSpaceApps2016
+db = client.DisastersDateSpaceApps2016
 col = db.disasters
 col.ensure_index([("loc", pymongo.GEOSPHERE)])
 
@@ -55,7 +55,7 @@ def _my_dict(obj):
 
 def findAll(absoluteUrl=None):
     if absoluteUrl is None:
-        url = _Api.DISASTERS + '?limit=1000'
+        url = _Api.DISASTERS + '?limit=1000&offset=2000'
     else:
         url = absoluteUrl
     return requests.get(url).json()
@@ -118,6 +118,7 @@ def _parseResult(disasters):
                     filters['eventType'].append(event)
                 filters['status'] = fields['status']
                 filters['featured'] = fields['featured']
+                filters['date'] = fields['date']['created']
 
                 saveToMongo(register, filters)
 
@@ -135,5 +136,6 @@ def saveToMongo(disaster, filters):
     dir['eventType'] = filters['eventType']
     dir['status'] = filters['status']
     dir['featured'] = filters['featured']
+    dir['date'] = filters['date']
 
     col.insert(dir)
