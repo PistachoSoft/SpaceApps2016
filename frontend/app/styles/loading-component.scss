@@ -12,7 +12,7 @@
 }
 
 .loading {
-  height: $standard-margin + 25px;
+  height: $standard-margin + $loading-dot;
   width: 100%;
   margin: auto;
   position: absolute;
@@ -27,8 +27,8 @@
   .dot {
     background: $gray;
     display: inline-block;
-    width: 25px;
-    height: 25px;
+    width: $loading-dot;
+    height: $loading-dot;
     margin: $standard-margin;
     border-radius: 50%;
     animation: load 1.4s infinite ease-in-out both;

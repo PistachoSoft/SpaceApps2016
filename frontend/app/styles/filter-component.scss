@@ -113,7 +113,7 @@
             vertical-align: middle;
 
             &:hover {
-              @include box-shadow($border-size, $border-size)
+              @include box-shadow($border-size, $border-size);
             }
 
             &.checked {
@@ -160,13 +160,13 @@
               border-radius: 0;
 
               &:hover {
-                @include box-shadow($border-size, $border-size)
+                @include box-shadow($border-size, $border-size);
               }
 
               &:focus {
                 outline: none;
 
-                @include box-shadow($border-size, $border-size)
+                @include box-shadow($border-size, $border-size);
               }
             }
           }
