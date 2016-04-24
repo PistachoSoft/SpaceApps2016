@@ -99,35 +99,41 @@ angular.module('ProjectBarataria').service('apiService', [
         });
       },
       // Get total number of disasters for each year in the interval
-      getDisastersPerYear: function(startYear, endYear, country) {
-        return $http.get(api.statsHost + api.rest.disastersPerYear, {
-          from: startYear,
-          to: endYear,
-          country: country
+      getDisastersPerYear: function(startYear, endYear, country, disasters) {
+        return $http.get(api.host + api.rest.disastersPerYear, {
+          params: {
+            from: startYear,
+            to: endYear,
+            countries: country,
+            disasters: disasters
+          }
         });
       },
       // Get the total percentage of events of each type for the whole interval
-      getDisastersPercentageGlobal: function(startYear, endYear, country) {
-        return $http.get(api.statsHost + api.rest.globalPercentages, {
+      getPercentageGlobal: function(startYear, endYear, country, disasters) {
+        return $http.get(api.host + api.rest.globalPercentages, {
           from: startYear,
           to: endYear,
-          country: country
+          countries: country,
+          disasters: disasters
         });
       },
       // Get the percentage of events of each type for each year in the interval
-      getDissastersPercentagePerYear: function(startYear, endYear, country) {
-        return $http.get(api.statsHost + api.rest.perYearPercentages, {
+      getDissastersPercentagePerYear: function(startYear, endYear, country, disasters) {
+        return $http.get(api.host + api.rest.perYearPercentages, {
           from: startYear,
           to: endYear,
-          country: country
+          countries: country,
+          disasters: disasters
         });
       },
       // Get the count of events of each type for each year in the interval
-      getDisastersEvolution: function(startYear, endYear, country) {
-        return $http.get(api.statsHost + api.rest.disastersEvolution, {
+      getDisastersEvolution: function(startYear, endYear, country, disasters) {
+        return $http.get(api.host + api.rest.disastersEvolution, {
           from: startYear,
           to: endYear,
-          country: country
+          countries: country,
+          disasters: disasters
         });
       }
     };

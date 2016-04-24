@@ -37,10 +37,22 @@ def findAll(countries=None, dateFrom=None, dateTo=None, bottomLeft=[], upperRigh
             })
         andQuery.append(eventsQuery)
 
+    if dateFrom is not None and dateTo is not None:
+        dateQuery = {
+            'date': {
+                '$gte': dateFrom,
+                '$lt': dateTo
+            }
+        }
+        andQuery.append(dateQuery)
+
     if len(andQuery) > 1:
         query['$and'] = andQuery
-    elif len(andQuery) == 1:
+    elif len(andQuery) == 1 and '$or' in andQuery[0]:
         query['$or'] = andQuery[0]['$or']
+    elif len(andQuery) == 1:
+        query['date'] = andQuery[0]['date']
+
 
     data_set = list(disasters.find(query))
     return map(lambda x: x['data'], data_set)
