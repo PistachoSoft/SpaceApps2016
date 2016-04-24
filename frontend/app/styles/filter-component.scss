@@ -19,6 +19,9 @@
   }
 
   .filter-wrapper {
+    height: calc(100% - #{$filter-branch-height});
+
+    @include unselect();
 
     .filter-branch {
 
@@ -27,8 +30,6 @@
         line-height: $filter-branch-height;
         padding-left: $filter-caret-width;
         position: relative;
-
-        @include unselect();
 
         &:hover {
           background: $gray;
@@ -45,8 +46,70 @@
       }
 
       .values-container {
-        margin-left: $filter-caret-width;
+
+        .value-wrapper {
+          height: $filter-value-height;
+          line-height: $filter-value-height;
+          padding-left: $filter-caret-width;
+          box-sizing: border-box;
+
+          &:hover {
+            background: $gray;
+            cursor: pointer;
+          }
+
+          .value-checkbox {
+            background: $dark-gray;
+            border: 2 * $border-size solid $darker-gray;
+            width: $checkbox-height;
+            height: $checkbox-height;
+            box-sizing: border-box;
+            line-height: $checkbox-height;
+            font-size: $font-size;
+            display: inline-block;
+            vertical-align: middle;
+
+            &.checked {
+              color: $white;
+              background: $green;
+              border: none;
+              font-size: $icon-size-small;
+              vertical-align: middle;
+              text-align: center;
+            }
+          }
+
+          .value-label {
+            vertical-align: middle;
+          }
+        }
+
+        .value-date-range {
+          margin: 0 $standard-margin;
+          padding: 0 $standard-padding;
+
+          .value-slider {
+            background: $dark-gray;
+            font-size: $icon-size-small;
+            border-radius: 0;
+
+            .ui-slider-range {
+              background: $green;
+            }
+
+            .ui-slider-handle {
+              background: $gray;
+              width: 12px;
+              border-radius: 0;
+            }
+          }
+        }
       }
     }
+  }
+
+  .apply-button {
+    height: $filter-branch-height;
+    width: 100%;
   }
 }
