@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 // DEFINE SCHEMA
-var statsDBschema = mongoose.Schema({
+var statsDBSchema = mongoose.Schema({
   year : { type: String},
   disasterType : { type: String},
   iso : { type: String},
@@ -15,7 +15,7 @@ var statsDBschema = mongoose.Schema({
   totalDamage : { type: String}
 });
 
-var statsDB = mongoose.model('statsDB', statsDBschema);
+var statsDB = mongoose.model('statsDB', statsDBSchema);
 
 module.exports = {
   add: function (stats, callback) {
@@ -25,9 +25,27 @@ module.exports = {
     });
   },
   findAll: function(callback){
-    statsDB.find({}, function(err, res){
+    statsDB.find({},{_id:0, __v:0}, function(err, res){
       callback(err,res)
     });
+  },
+  getCountryList : function (callback)
+  {
+    var items = statsDB.find().distinct('countryName');
+    //items.select('countryName');
+    items.exec( function(err,res){
+      callback(err,res);
+    })
+
+  },
+  getDisasterList : function (callback)
+  {
+    var items = statsDB.find().distinct('disasterType');
+    //items.select('countryName');
+    items.exec( function(err,res){
+      callback(err,res);
+    })
+
   }
 
 

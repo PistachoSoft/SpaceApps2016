@@ -13,7 +13,7 @@ var addDataToDB = function (callback)
     }, function(err,output){
     if(!err)
     {
-      callback(output);
+      output.forEach(addItem)
     }
     else
       callback(err);
