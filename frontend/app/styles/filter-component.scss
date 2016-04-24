@@ -2,17 +2,51 @@
 @import "mixins";
 
 .filter-component {
-  background: $gray;
+  background: $light-gray;
   width: $filter-width;
+  height: calc(100% - #{$header-height});
   position: absolute;
   top: $header-height;
   left: 0;
-  height: calc(100% - #{$header-height});
   z-index: 50;
 
   @include box-shadow($border-size, $border-size);
 
   @media screen and (max-width: $responsive-limit) {
+    height: calc(100% - #{$header-height-responsive});
     width: $filter-width-responsive;
+    top: $header-height-responsive;
+  }
+
+  .filter-wrapper {
+
+    .filter-branch {
+
+      .branch-label {
+        height: $filter-branch-height;
+        line-height: $filter-branch-height;
+        padding-left: $filter-caret-width;
+        position: relative;
+
+        @include unselect();
+
+        &:hover {
+          background: $gray;
+          cursor: pointer;
+        }
+
+        .branch-caret {
+          width: $filter-caret-width;
+          position: absolute;
+          left: 0;
+          line-height: $filter-branch-height;
+          text-align: center;
+        }
+      }
+
+      .values-container {
+        margin-left: $filter-caret-width;
+      }
+    }
   }
 }

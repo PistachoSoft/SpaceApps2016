@@ -1,0 +1,28 @@
+@import "variables";
+@import "mixins";
+
+.stats-view {
+  background: $light-gray;
+  width: 100%;
+
+  .stats-wrapper {
+    margin: 0 auto;
+    text-align: center;
+    list-style-type: none;
+    padding: 0;
+
+    .graph {
+      background: $dark-gray;
+      display: inline-block;
+      width: 400px;
+      height: 300px;
+      padding: 0;
+      margin: 25px;
+
+      @media screen and (max-width: 500px) {
+        width: calc(100% - 50px);
+        height: 200px;
+      }
+    }
+  }
+}

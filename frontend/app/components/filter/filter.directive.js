@@ -7,6 +7,7 @@ angular.module('ProjectBarataria').directive('filter', [
       scope: {
         filterOpened: '='
       },
+      controller: 'FilterCtrl',
       template: $templateCache.get('components/filter/filter.tpl.html'),
       link: function(scope) {
         scope.closeFilter = function() {

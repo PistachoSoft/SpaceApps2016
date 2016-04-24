@@ -1,19 +1,20 @@
 <div class="map-view">
   <div data-header
-      data-filter-opened="filterOpened">
+      data-filter-opened="filterOpened"
+      data-state="home">
   </div>
   <div data-ng-show="filterOpened"
       data-filter
       data-filter-opened="filterOpened">
   </div>
   <div data-modal-dialog
-    data-visible="popupOpened"
-    data-title="{{ detail.title }}"
-    data-modal-id="detailsModal">
+      data-visible="popupOpened"
+      data-title="{{ detail.title }}"
+      data-modal-id="detailsModal">
     <div data-detail
-      data-description="{{ detail.description }}"
-      data-links="detail.links"
-      data-images="detail.images">
+        data-description="{{ detail.description }}"
+        data-links="detail.links"
+        data-images="detail.images">
     </div>
   </div>
   <div class="map-wrapper"
