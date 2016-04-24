@@ -16,9 +16,9 @@ angular.module('ProjectBarataria').directive('modalDialog', [
       restrict: 'A',
       template: $templateCache.get('components/modal/modal-dialog.tpl.html'),
       scope: {
-        modalId: '@', // One way binding, expression expected
-        title: '@',   // One way binding, expression expected
-        visible: '='  // Two way binding, variable name expected
+        modalId: '@',
+        title: '@',
+        visible: '='
       },
       link: function (scope, element, attrs) {
         // Set modalShow if not set

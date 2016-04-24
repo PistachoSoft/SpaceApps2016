@@ -6,14 +6,15 @@
       data-filter
       data-filter-opened="filterOpened">
   </div>
-  <div data-modal-dialog
-    data-visible="popupOpened"
-    data-title="{{ detail.title }}"
-    data-modal-id="detailsModal">
-    <div data-detail
-      data-description="{{ detail.description }}"
-      data-links="detail.links"
-      data-images="detail.images">
+  <div data-ng-show="popupOpened">
+    <div data-modal-dialog
+        data-visible="popupOpened"
+        data-title="{{ detail.title }}"
+        data-modal-id="detailsModal">
+      <div data-detail
+          data-description="{{ detail.description }}"
+          data-links="detail.links"
+          data-images="detail.images"></div>
     </div>
   </div>
   <div class="map-wrapper"
