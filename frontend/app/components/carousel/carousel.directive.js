@@ -25,8 +25,6 @@ angular.module('ProjectBarataria').directive('carousel', [
       link: function(scope, element) {
 
         scope.index = 0;
-        scope.showPrev = false;
-        scope.imgPrev = {};
 
         scope.prevImg = function() {
           scope.index = (scope.index + 2) % 3;
@@ -34,16 +32,6 @@ angular.module('ProjectBarataria').directive('carousel', [
 
         scope.nextImg = function() {
           scope.index = (scope.index + 1) % 3;
-        }
-
-        scope.showImg = function(idx) {
-          scope.showPrev = true;
-          scope.imgPrev = scope.images[idx];
-        }
-
-        scope.hideImg = function(idx) {
-          scope.showPrev = false;
-          scope.imgPrev = {};
         }
 
       }
