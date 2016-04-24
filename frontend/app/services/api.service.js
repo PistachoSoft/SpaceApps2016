@@ -1,32 +1,21 @@
 angular.module('ProjectBarataria').service('apiService', [
-  '$http', '$q',
-  function($http, $q) {
+  '$http', 'api',
+  function($http, api) {
     return {
       getFilterDates: function() {
-        return $q.resolve({
-          max: 100,
-          min: 10
+        return $http.get(api.host + api.rest.filterDates).then(function(response) {
+          return response.data;
         });
       },
       getFilterCountries: function() {
-        return $q.resolve([
-          'Spain',
-          'Japan',
-          'Mexico',
-          'United States',
-          'Peru',
-          'France'
-        ]);
+        return $http.get(api.host + api.rest.filterCountries).then(function(response) {
+          return response.data;
+        });
       },
       getFilterEvents: function() {
-        return $q.resolve([
-          'Wildfires',
-          'Earthquakes',
-          'Droughts',
-          'Floods',
-          'Typhoons',
-          'Volcano'
-        ]);
+        return $http.get(api.host + api.rest.filterEvents).then(function(response) {
+          return response.data;
+        });
       }
     };
   }

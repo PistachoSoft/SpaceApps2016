@@ -127,7 +127,16 @@
           }
 
           .value-label {
+            width: $filter-width - ($filter-caret-width * 3 + $standard-padding);
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
             vertical-align: middle;
+            text-overflow: ellipsis;
+
+            @media screen and (max-width: $responsive-limit) {
+              width: calc(#{$filter-width-responsive} - (3 * #{$standard-padding}));
+            }
           }
         }
 
