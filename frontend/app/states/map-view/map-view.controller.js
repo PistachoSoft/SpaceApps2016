@@ -7,7 +7,14 @@ angular.module('ProjectBarataria').controller('MapViewCtrl', [
       var bounds = layerService.getCurrentBounds(),
         filters = filterService.getCurrentFilters();
 
-      console.log(bounds, filters);
+      console.log(bounds, angular.copy(filters));
+
+      apiService.getAllPoints({
+        filters: angular.copy(filters),
+        bounds: bounds
+      }).then(function(data) {
+        layerService.setMarkerLayer(data);
+      });
     }
 
     $scope.item = {
@@ -60,7 +67,10 @@ angular.module('ProjectBarataria').controller('MapViewCtrl', [
 
     layerService.setupBaseLayer();
 
-    apiService.getAllPoints().then(function(data) {
+    apiService.getAllPoints({
+      filters: angular.copy(filterService.getCurrentFilters()),
+      bounds: layerService.getCurrentBounds()
+    }).then(function(data) {
       layerService.setMarkerLayer(data);
     });
 

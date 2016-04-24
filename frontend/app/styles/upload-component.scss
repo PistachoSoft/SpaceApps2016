@@ -8,6 +8,11 @@
     padding: $standard-margin;
     box-sizing: border-box;
 
+    @media screen and (max-width: $responsive-limit) {
+      width: 100%;
+      float: none;
+    }
+
     .file-input {
       width: 100%;
     }
@@ -18,6 +23,11 @@
     float: right;
     padding: $standard-margin;
     box-sizing: border-box;
+
+    @media screen and (max-width: $responsive-limit) {
+      width: 100%;
+      float: none;
+    }
 
     .country-input {
       width: 100%;

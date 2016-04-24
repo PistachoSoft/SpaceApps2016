@@ -1,6 +1,6 @@
 angular.module('ProjectBarataria').constant('api', {
   statsHost: 'http://10.10.11.46:3000',
-  mapHost: 'http://10.10.11.44:5000',
+  mapHost: 'http://localhost:5000',
   rest: {
     filterDates: '/filterDates',
     filterCountries: '/filterCountries',

@@ -1,6 +1,36 @@
 angular.module('ProjectBarataria').service('apiService', [
   '$http', 'api',
   function($http, api) {
+    function requestParse(options) {
+      var result = {},
+        countryOptions;
+
+      if (options.bounds) {
+        result.box = {
+          bottomLeft: [options.bounds._southWest.lat, options.bounds._southWest.lng],
+          upperRight: [options.bounds._northEast.lat, options.bounds._northEast.lng]
+        };
+      }
+
+      if (options.filters) {
+        countryOptions = _.find(options.filters, {
+          label: 'Countries'
+        });
+
+        if (countryOptions) {
+          result.contry = countryOptions.values
+          .filter(function(country) {
+            return country.checked;
+          })
+          .map(function(country) {
+            return country.iso.toLowerCase();
+          });
+        }
+      }
+
+      return result;
+    }
+
     return {
       getFilterDates: function() {
         return $http.get(api.statsHost + api.rest.filterDates)
@@ -38,10 +68,12 @@ angular.module('ProjectBarataria').service('apiService', [
           return [];
         });
       },
-      getAllPoints: function() {
-        return $http.post(api.mapHost + api.rest.allPoints)
+      getAllPoints: function(options) {
+        var _options = requestParse(options);
+
+        return $http.post(api.mapHost + api.rest.allPoints, _options)
         .then(function(response) {
-          return response.data;
+          return [] || response.data;
         });
       },
       // Get total number of disasters for each year in the interval

@@ -45,9 +45,14 @@ angular.module('ProjectBarataria').service('filterService', [
 
         countries.values = results.countries.map(function(country) {
           return {
-            label: country,
+            label: country.countryName,
+            iso: country.iso,
             checked: false
           };
+        });
+
+        countries.values = _.sortBy(countries.values, function(country) {
+          return country.label;
         });
 
         dates.value = {
