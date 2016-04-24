@@ -1,15 +1,89 @@
 @import "variables";
+@import "mixins";
 
 .map-view {
   background: $light-gray;
-  height: 100%;
+  height: calc(100% - #{$header-height});
   width: 100%;
 
-  .map {
-    padding: $standard-padding;
+  @media screen and (max-width: $responsive-limit) {
+    height: calc(100% - #{$header-height-responsive});
+  }
+
+  .map-wrapper {
+    height: 100%;
+    width: 100%;
+    position: relative;
 
     &.filter-opened {
-      margin-left: $filter-width;
+      width: 100%;
+
+      @media screen and (max-width: $responsive-limit) {
+        margin-left: 0;
+      }
+
+      @media screen and (min-width: $responsive-limit) {
+        .leaflet-bottom.leaflet-left {
+          margin-left: $filter-width;
+        }
+      }
+    }
+
+    #map {
+      height: 100%;
+      width: 100%;
+
+      .leaflet-bottom.leaflet-left {
+        z-index: 10;
+      }
+
+      .leaflet-control-zoom {
+        box-shadow: none;
+
+        .leaflet-control-zoom-in,
+        .leaflet-control-zoom-out {
+          color: $gray;
+          background: $darker-gray;
+          border-radius: 0;
+
+          @media screen and (max-width: $responsive-limit) {
+            height: $button-height;
+            width: $button-height;
+            line-height: $button-height;
+            font-size: 2em;
+          }
+
+          &:hover {
+            color: $white;
+            background: $green;
+            cursor: pointer;
+
+            @include box-shadow($border-size, 0);
+          }
+
+          &:active {
+            background: $darker-green;
+          }
+        }
+      }
+    }
+
+    .upload-button {
+      border-radius: 50%;
+      margin: $standard-margin;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+  }
+
+  .modal {
+    overflow: auto;
+
+    .modal-title {
+      cursor: default;
+
+      @include unselect();
     }
   }
 }

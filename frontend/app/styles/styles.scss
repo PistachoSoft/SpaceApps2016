@@ -19,6 +19,7 @@ html, body {
     width: inherit;
   }
 
+  @import "buttons";
   @import "map-view";
   @import "header-component";
   @import "filter-component";

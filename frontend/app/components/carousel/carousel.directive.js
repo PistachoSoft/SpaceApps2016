@@ -28,11 +28,11 @@ angular.module('ProjectBarataria').directive('carousel', [
 
         scope.prevImg = function() {
           scope.index = (scope.index + 2) % 3;
-        }
+        };
 
         scope.nextImg = function() {
           scope.index = (scope.index + 1) % 3;
-        }
+        };
 
       }
     };

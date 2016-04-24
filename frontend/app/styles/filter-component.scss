@@ -8,6 +8,11 @@
   top: $header-height;
   left: 0;
   height: calc(100% - #{$header-height});
+  z-index: 50;
 
   @include box-shadow($border-size, $border-size);
+
+  @media screen and (max-width: $responsive-limit) {
+    width: $filter-width-responsive;
+  }
 }
