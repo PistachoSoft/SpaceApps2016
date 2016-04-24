@@ -1,6 +1,8 @@
 angular.module('ProjectBarataria').controller('MapViewCtrl', [
-  '$scope', 'layerService',
-  function($scope, layerService) {
+  '$rootScope', '$scope', 'events', 'layerService',
+  function($rootScope, $scope, events, layerService) {
+    var subscribers = [];
+
     $scope.item = {
       title: 'Events in Iwo Jima',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ' +
@@ -42,5 +44,22 @@ angular.module('ProjectBarataria').controller('MapViewCtrl', [
     };
 
     layerService.setupBaseLayer();
+
+    subscribers.push($rootScope.$on(events.filter.changed, function() {
+      // TODO refreshView()
+    }));
+
+    subscribers.push($rootScope.$on(events.area.clicked, function() {
+      $scope.detail = _.cloneDeep($scope.item);
+      $scope.popupOpened = true;
+
+      $scope.$applyAsync();
+    }));
+
+    $scope.$on('$destroy', function() {
+      subscribers.forEach(function(subscriber) {
+        subscriber();
+      })
+    });
   }
 ]);

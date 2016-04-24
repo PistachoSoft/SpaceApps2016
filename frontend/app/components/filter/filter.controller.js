@@ -1,7 +1,7 @@
 angular.module('ProjectBarataria').controller('FilterCtrl', [
   '$scope', 'filterService',
   function($scope, filterService) {
-    $scope.filters = filterService.getFilters();
+    $scope.filters = [];
 
     $scope.toggleBranch = function(filter) {
       filter.expanded = !filter.expanded;
@@ -14,5 +14,9 @@ angular.module('ProjectBarataria').controller('FilterCtrl', [
     $scope.applyFilters = function() {
       filterService.saveFilters($scope.filters);
     };
+
+    filterService.getFilters().then(function(filters) {
+      $scope.filters = filters;
+    });
   }
 ]);

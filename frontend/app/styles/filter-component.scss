@@ -2,7 +2,7 @@
 @import "mixins";
 
 .filter-component {
-  background: $light-gray;
+  background: $white;
   width: $filter-width;
   height: calc(100% - #{$header-height});
   position: absolute;
@@ -18,8 +18,37 @@
     top: $header-height-responsive;
   }
 
+  .search-filters {
+    height: $filter-branch-height;
+
+    @media screen and (max-width: $responsive-limit) {
+      height: $filter-branch-height-responsive;
+    }
+
+    .search-field {
+      width: 100%;
+      height: $filter-branch-height;
+      padding: 0 $standard-margin;
+      font-family: inherit;
+
+      @media screen and (max-width: $responsive-limit) {
+        height: $filter-branch-height-responsive;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
   .filter-wrapper {
-    height: calc(100% - #{$filter-branch-height});
+    height: calc(100% - #{$button-height} - #{$filter-branch-height});
+    position: relative;
+    overflow: auto;
+
+    @media screen and (max-width: $responsive-limit) {
+      height: calc(100% - #{$button-height-responsive} - #{$filter-branch-height-responsive});
+    }
 
     @include unselect();
 
@@ -30,6 +59,11 @@
         line-height: $filter-branch-height;
         padding-left: $filter-caret-width;
         position: relative;
+
+        @media screen and (max-width: $responsive-limit) {
+          height: $filter-branch-height-responsive;
+          line-height: $filter-branch-height-responsive;
+        }
 
         &:hover {
           background: $gray;
@@ -42,6 +76,10 @@
           left: 0;
           line-height: $filter-branch-height;
           text-align: center;
+
+          @media screen and (max-width: $responsive-limit) {
+            line-height: $filter-branch-height-responsive;
+          }
         }
       }
 
@@ -52,6 +90,11 @@
           line-height: $filter-value-height;
           padding-left: $filter-caret-width;
           box-sizing: border-box;
+
+          @media screen and (max-width: $responsive-limit) {
+            height: $filter-value-height-responsive;
+            line-height: $filter-value-height-responsive;
+          }
 
           &:hover {
             background: $gray;
@@ -69,6 +112,10 @@
             display: inline-block;
             vertical-align: middle;
 
+            &:hover {
+              @include box-shadow($border-size, $border-size);
+            }
+
             &.checked {
               color: $white;
               background: $green;
@@ -80,16 +127,26 @@
           }
 
           .value-label {
+            width: $filter-width - ($filter-caret-width * 3 + $standard-padding);
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
             vertical-align: middle;
+            text-overflow: ellipsis;
+
+            @media screen and (max-width: $responsive-limit) {
+              width: calc(#{$filter-width-responsive} - (3 * #{$standard-padding}));
+            }
           }
         }
 
         .value-date-range {
-          margin: 0 $standard-margin;
+          margin: 0 $standard-margin $standard-margin $standard-margin;
           padding: 0 $standard-padding;
 
           .value-slider {
             background: $dark-gray;
+            border: 2 * $border-size solid $darker-gray;
             font-size: $icon-size-small;
             border-radius: 0;
 
@@ -101,6 +158,16 @@
               background: $gray;
               width: 12px;
               border-radius: 0;
+
+              &:hover {
+                @include box-shadow($border-size, $border-size);
+              }
+
+              &:focus {
+                outline: none;
+
+                @include box-shadow($border-size, $border-size);
+              }
             }
           }
         }
@@ -109,7 +176,8 @@
   }
 
   .apply-button {
-    height: $filter-branch-height;
     width: 100%;
+
+    @include unselect();
   }
 }

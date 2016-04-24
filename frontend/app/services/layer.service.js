@@ -1,5 +1,6 @@
 angular.module('ProjectBarataria').service('layerService', [
-  function() {
+  '$rootScope', 'events',
+  function($rootScope, events) {
     var layers = {
       base: null,
       marker: null
@@ -17,7 +18,7 @@ angular.module('ProjectBarataria').service('layerService', [
       layers.marker = L.marker([41.659631, -0.907582]);
 
       layers.marker.on('click', function() {
-        console.log('Derp');
+        $rootScope.$emit(events.area.clicked);
       });
 
       layers.marker.addTo(layers.base);

@@ -17,16 +17,19 @@ $standard-padding: 5px;
 $standard-margin: 10px;
 $button-height: 40px;
 $header-height: 40px;
-$filter-width: 200px;
+$filter-width: 300px;
 $filter-branch-height: 40px;
 $filter-caret-width: 30px;
 $filter-value-height: 35px;
 $checkbox-height: 20px;
 $carousel-height: 150px;
+$loading-dot: 25px;
 
 // Responsive sizes
 $responsive-limit: 400px;
 $carousel-responsive-limit: 600px;
 $button-height-responsive: 60px;
 $header-height-responsive: 60px;
+$filter-branch-height-responsive: 60px;
+$filter-value-height-responsive: 45px;
 $filter-width-responsive: 90%;

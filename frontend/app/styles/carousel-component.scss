@@ -1,32 +1,59 @@
 @import "variables";
+@import "mixins";
 
 .carousel-component {
 
   .thumbnail-list {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    list-style-type: none;
     padding: 0;
-    margin: 0 auto $standard-padding;
-  }
-
-  .carousel-item {
-    padding: $standard-padding;
-    display: inline-block;
-    max-height: $carousel-height;
-    height: $carousel-height;
-    background-color: $dark-gray;
-    max-width: 30%;
 
     @media screen and (max-width: $carousel-responsive-limit) {
-      max-width: 100%;
-      &.hidden-mobile {
-        display: none;
+      height: 300px;
+    }
+
+    .carousel-item {
+      display: inline-block;
+      max-height: $carousel-height;
+      height: $carousel-height;
+      width: 30%;
+      box-sizing: border-box;
+      padding: 0;
+
+      @media screen and (max-width: $carousel-responsive-limit) {
+        max-height: 300px;
+        width: 100%;
+
+        &.hidden-mobile {
+          display: none;
+        }
+      }
+
+      .carousel-img {
+        max-width: 100%;
+        max-height: 100%;
+        vertical-align: middle;
       }
     }
   }
 
-  .carousel-img {
-    max-width: 100%;
-    max-height: 100%;
-    vertical-align: top;
+  .pager {
+    width: 100%;
+    height: $button-height;
+    display: inline-flex;
+    position: relative;
+
+    .previous {
+      position: absolute;
+      left: 0;
+    }
+
+    .next {
+      position: absolute;
+      right: 0;
+    }
   }
 
 }

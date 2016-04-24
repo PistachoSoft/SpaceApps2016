@@ -1,37 +1,39 @@
 <div class="carousel-component">
-  <ul class="thumbnail-list">
-    <li class="carousel-item">
-      <a data-ng-click="showImg(index)">
+  <div class="thumbnail-list">
+    <div class="carousel-item">
+      <div data-ng-click="showImg(index)">
         <img class="carousel-img"
             data-ng-src="{{ images[index].src }}"
             alt="{{ images[index].name }}">
-      </a>
-    </li>
-    <li class="carousel-item hidden-mobile">
-      <a data-ng-click="showImg((index + 1) % 3)">
+      </div>
+    </div>
+    <div class="carousel-item hidden-mobile">
+      <div data-ng-click="showImg((index + 1) % 3)">
         <img class="carousel-img"
             data-ng-src="{{ images[(index + 1) % 3].src }}"
             alt="{{ images[(index + 1) % 3].name }}">
-      </a>
-    </li>
-    <li class="carousel-item hidden-mobile">
-      <a data-ng-click="showImg((index + 2) % 3)">
+      </div>
+    </div>
+    <div class="carousel-item hidden-mobile">
+      <div data-ng-click="showImg((index + 2) % 3)">
         <img class="carousel-img"
             data-ng-src="{{ images[(index + 2) % 3].src }}"
             alt="{{ images[(index + 2) % 3].name }}">
-      </a>
-    </li>
-  </ul>
-  <ul class="pager">
-    <li class="previous">
-      <a ng-click="prevImg()">
+      </div>
+    </div>
+  </div>
+  <div class="pager">
+    <div class="previous">
+      <div class="button button-big"
+          data-ng-click="prevImg()">
         <span class="fa fa-arrow-left"></span>
-      </a>
-    </li>
-    <li class="next">
-      <a ng-click="nextImg()">
+      </div>
+    </div>
+    <div class="next">
+      <div class="button button-big"
+          data-ng-click="nextImg()">
         <span class="fa fa-arrow-right"></span>
-      </a>
-    </li>
-  </ul>
+      </div>
+    </div>
+  </div>
 </div>

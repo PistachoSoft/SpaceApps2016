@@ -15,6 +15,7 @@
     "bootstrap-datepicker": "1.6.0",
     "font-awesome": "4.6.1",
     "jquery": "2.1.4",
+    "jquery-ui-touch-punch": "0.2.3",
     "leaflet": "0.7.7",
     "lodash": "4.11.1"
   },
