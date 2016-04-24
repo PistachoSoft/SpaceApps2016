@@ -24,7 +24,7 @@
           data-ng-if="filter.expanded">
         <div data-ng-if="filter.type === 'checkbox'">
           <div class="value-wrapper"
-              data-ng-repeat="value in filter.values | filter: {label: search} | limitTo: 5"
+              data-ng-repeat="value in filter.values | filter: {label: search}"
               data-ng-click="toggleValue(value)">
             <span class="value-checkbox"
                 data-ng-class="{

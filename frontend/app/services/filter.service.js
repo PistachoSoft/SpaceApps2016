@@ -1,6 +1,6 @@
 angular.module('ProjectBarataria').service('filterService', [
-  '$q', 'constants', 'apiService',
-  function($q, constants, apiService) {
+  '$rootScope', '$q', 'events', 'constants', 'apiService',
+  function($rootScope, $q, events, constants, apiService) {
     var selectedFilters = null;
 
     function generateFilters() {
@@ -58,6 +58,8 @@ angular.module('ProjectBarataria').service('filterService', [
 
     function saveFilters(filters) {
       selectedFilters = _.cloneDeep(filters);
+
+      $rootScope.$emit(events.filter.changed);
     }
 
     return {
