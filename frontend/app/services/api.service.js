@@ -2,8 +2,7 @@ angular.module('ProjectBarataria').service('apiService', [
   '$http', 'api',
   function($http, api) {
     function requestParse(options) {
-      var result = {},
-        countryOptions, eventOptions;
+      var result = {};
 
       if (options.bounds) {
         result.box = {
@@ -13,7 +12,7 @@ angular.module('ProjectBarataria').service('apiService', [
       }
 
       if (options.filters) {
-        countryOptions = _.find(options.filters, {
+        var countryOptions = _.find(options.filters, {
           label: 'Countries'
         });
 
@@ -31,7 +30,7 @@ angular.module('ProjectBarataria').service('apiService', [
           }
         }
 
-        eventOptions = _.find(options.filters, {
+        var eventOptions = _.find(options.filters, {
           label: 'Event Types'
         });
 
@@ -47,6 +46,50 @@ angular.module('ProjectBarataria').service('apiService', [
           if (!result.events.length) {
             delete result.events;
           }
+        }
+
+        var statusOptions = _.find(options.filters, {
+          label: 'Status'
+        });
+
+        if (statusOptions) {
+          result.status = statusOptions.values
+            .filter(function(status) {
+              return status.checked;
+            })
+            .map(function(status) {
+              return status.label.toLowerCase();
+            });
+
+          if (!result.status.length) {
+            delete result.status;
+          }
+        }
+
+        var featureOptions = _.find(options.filters, {
+          label: 'Featured'
+        });
+
+        if (featureOptions) {
+          result.featured = !!featureOptions.values
+            .filter(function(feature) {
+              return feature.checked;
+            }).length;
+
+          if (!result.featured) {
+            delete result.featured;
+          }
+        }
+
+        var dateOptions = _.find(options.filters, {
+          label: 'Date Range'
+        });
+
+        if (dateOptions) {
+          result.date = {
+            from: dateOptions.value.selected[0] + '-01-01T00:00:00+00:00',
+            to: dateOptions.value.selected[1] + '-01-01T00:00:00+00:00'
+          };
         }
       }
 
