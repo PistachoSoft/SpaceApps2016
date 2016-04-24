@@ -3,6 +3,10 @@ angular.module('ProjectBarataria').constant('api', {
   rest: {
     filterDates: '/filterDates',
     filterCountries: '/filterCountries',
-    filterEvents: '/filterEvents'
+    filterEvents: '/filterEvents',
+    disastersPerYear: '/disasters-per-year',
+    globalPercentages: '/global-percentages',
+    perYearPercentages: '/per-year-percentages',
+    disastersEvolution: '/disasters-evolution'
   }
 });
