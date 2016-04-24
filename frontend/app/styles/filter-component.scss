@@ -2,7 +2,7 @@
 @import "mixins";
 
 .filter-component {
-  background: $light-gray;
+  background: $white;
   width: $filter-width;
   height: calc(100% - #{$header-height});
   position: absolute;
@@ -20,6 +20,7 @@
 
   .filter-wrapper {
     height: calc(100% - #{$filter-branch-height});
+    position: relative;
 
     @include unselect();
 
@@ -69,6 +70,10 @@
             display: inline-block;
             vertical-align: middle;
 
+            &:hover {
+              @include box-shadow($border-size, $border-size)
+            }
+
             &.checked {
               color: $white;
               background: $green;
@@ -90,6 +95,7 @@
 
           .value-slider {
             background: $dark-gray;
+            border: 2 * $border-size solid $darker-gray;
             font-size: $icon-size-small;
             border-radius: 0;
 
@@ -101,6 +107,16 @@
               background: $gray;
               width: 12px;
               border-radius: 0;
+
+              &:hover {
+                @include box-shadow($border-size, $border-size)
+              }
+
+              &:focus {
+                outline: none;
+
+                @include box-shadow($border-size, $border-size)
+              }
             }
           }
         }
@@ -111,5 +127,7 @@
   .apply-button {
     height: $filter-branch-height;
     width: 100%;
+
+    @include unselect();
   }
 }

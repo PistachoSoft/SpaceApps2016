@@ -1,7 +1,9 @@
-<div class="filter-component"
-    data-ng-swipe-left="closeFilter()">
+<div class="filter-component">
   <div class="filter-wrapper">
+    <div data-loading
+        data-ng-if="!filters.length"></div>
     <div class="filter-branch"
+        data-ng-if="filters.length"
         data-ng-repeat="filter in filters">
       <div class="branch-label"
           data-ng-click="toggleBranch(filter)">
