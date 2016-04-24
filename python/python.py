@@ -54,20 +54,14 @@ def test():
     params = json.loads(request.data)
 
     country = None
-    dateFrom = None
-    dateTo = None
     upperRight = None
     bottomLeft = None
     events = None
+    dateFrom = None
+    dateTo = None
 
     if 'country' in params:
         country = params['country']
-
-    if 'date' in params:
-        if 'from' in params['date']:
-            dateFrom = params['date']['from']
-        if 'to' in params['date']:
-            dateTo = params['date']['to']
 
     if 'box' in params:
         if 'upperRight' in params['box']:
@@ -77,6 +71,11 @@ def test():
 
     if 'events' in params:
         events = params['events']
+
+    if 'date' in params:
+        if 'to' in params['date'] and 'from' in params['date']:
+            dateFrom = params['date']['from']
+            dateTo = params['date']['to']
 
     body = json.dumps(MongoRepository.findAll(countries=country,
                                               dateFrom=dateFrom,
